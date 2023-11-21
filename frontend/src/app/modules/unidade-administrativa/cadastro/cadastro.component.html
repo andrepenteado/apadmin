@@ -1,0 +1,72 @@
+<app-breadcrumb
+  [title]="'Cadastro de Unidade Administrativa'"
+  [items]="[ ['Unidade Administrativa','/unidade-administrativa/pesquisar'] ]"
+  [active_item]="'Cadastro'">
+</app-breadcrumb>
+
+<div class="d-flex">
+  <ul ngbNav #nav="ngbNav" [animation]="true" class="nav-pills" orientation="vertical">
+    <li ngbNavItem="dados-cadastrais">
+      <a ngbNavLink>Dados Cadastrais</a>
+      <ng-template ngbNavContent>
+        <form [formGroup]="formUnidadeAdministrativa" [ngClass]="{'was-validated': !formUnidadeAdministrativa.valid && formUnidadeAdministrativaEnviado}">
+          <div class="card border border-primary rounded shadow-lg">
+            <div class="card-header">
+              <h5>Dados Cadastrais</h5>
+              <span>{{ dataCadastroFormatada | date: "'Cadastrada em' EEEE, dd 'de' MMMM 'de' yyyy 'às' HH:mm" }}</span>
+            </div>
+            <div class="card-body">
+              <div class="row mb-3">
+                <div class="form-group col-12 col-md-12">
+                  <label>* Nome</label>
+                  <input type="text" name="razaoSocial" formControlName="razaoSocial" class="form-control" required="true">
+                  <div class="invalid-feedback">Razão social é um campo obrigatório</div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="form-group col-12 col-md-12">
+                  <label>Tipo</label>
+                  <div class="m-t-15 m-checkbox-inline mb-0 custom-radio-ml ml-2">
+                    <div class="form-check form-check-inline">
+                      <input type="radio" class="form-check-input" id="tipo_1" name="tipo" formControlName="tipo" [value]="1"/>
+                      <label for="tipo_1" class="mb-0">Diretoria</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="radio" class="form-check-input" id="tipo_2" name="tipo" formControlName="tipo" [value]="2"/>
+                      <label for="tipo_2" class="mb-0">Unidade</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="radio" class="form-check-input" id="tipo_3" name="tipo" formControlName="tipo" [value]="3"/>
+                      <label for="tipo_3" class="mb-0">Departamento</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="radio" class="form-check-input" id="tipo_4" name="tipo" formControlName="tipo" [value]="4"/>
+                      <label for="tipo_4" class="mb-0">Setor</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="radio" class="form-check-input" id="tipo_5" name="tipo" formControlName="tipo" [value]="5"/>
+                      <label for="tipo_5" class="mb-0">Seção</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="radio" class="form-check-input" id="tipo_6" name="tipo" formControlName="tipo" [value]="6"/>
+                      <label for="tipo_6" class="mb-0">Grupo</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-12 text-center">
+                  <button class="btn btn-primary" (click)="gravar()"><i class="fa fa-save fa-lg"></i> Gravar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="ms-4 col-10"></div>
+</div>
+
+<ap-exibe-mensagem #exibeMensagem></ap-exibe-mensagem>
