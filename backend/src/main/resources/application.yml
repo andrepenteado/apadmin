@@ -1,1 +1,60 @@
+spring:
+
+  application:
+    name: apadmin
+
+  datasource:
+    url: jdbc:postgresql://db.apcode.com.br/apadmin-dbname
+    username: apadmin-dbuser
+    password: apadmin-dbpasswd
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: apadmin-pool
+
+  jpa:
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        enable_lazy_load_no_trans: true
+        temp:
+          use_jdbc_metadata_defaults: false
+
+  security:
+    oauth2:
+      client:
+        registration:
+          apadmin-oidc:
+            provider: spring
+            client-id: com.github.andrepenteado.apadmin
+            client-secret: apadmin-secret
+            client-authentication-method: client_secret_basic
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid
+            client-name: apadmin-oidc
+        provider:
+          spring:
+            issuer-uri: https://apadmin.apcode.com.br
+
+  liquibase:
+    change-log: db/changelog/db.changelog-master.yaml
+
+server:
+  forward-headers-strategy: framework
+  error:
+    include-message: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://cluster.apcode.com.br:9411
 

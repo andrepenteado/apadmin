@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <!-- Nome da aplicação -->
+    <contextName>APadmin</contextName>
+
+    <property name="APP" value="apadmin" />
+    <property name="MODULE" value="apadmin" />
+
+    <include resource="logback-common.xml"/>
+
+</configuration>
