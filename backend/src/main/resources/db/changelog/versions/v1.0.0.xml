@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+      xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="1" author="andre.penteado">
+    <changeSet id="v1.0.0" author="andre.penteado">
         <createTable tableName="empresa">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" primaryKeyName="PK_Empresa"/>
@@ -27,6 +23,9 @@
             <column name="telefone" type="varchar(20)">
                 <constraints nullable="false"/>
             </column>
+            <column name="fk_empresa_matriz" type="bigint">
+                <constraints references="empresa(id)" deleteCascade="false" foreignKeyName="FK_Empresa_EmpresaMatriz"/>
+            </column>
             <column name="nomeFantasia" type="varchar(255)"/>
             <column name="email" type="varchar(255)"/>
             <column name="cep" type="bigint"/>
@@ -37,6 +36,82 @@
             <column name="cidade" type="varchar(255)"/>
             <column name="estado" type="varchar(2)"/>
         </createTable>
+        <createIndex tableName="empresa" indexName="IDX_Empresa_FKEmpresaMatriz">
+            <column name="fk_empresa_matriz"/>
+        </createIndex>
+
+        <createTable tableName="unidade_administrativa">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Unidade_Administrativa"/>
+            </column>
+            <column name="dataCadastro" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nome" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fk_empresa" type="bigint">
+                <constraints references="empresa(id)" deleteCascade="false" foreignKeyName="FK_UnidadeAdministrativa_Empresa"/>
+            </column>
+            <column name="fk_unidade_administrativa_superior" type="bigint">
+                <constraints references="unidade_administrativa(id)" deleteCascade="false" foreignKeyName="FK_UnidadeAdministrativa_UnidadeAdministrativaSuperior"/>
+            </column>
+            <column name="tipo" type="varchar(255)"/>
+        </createTable>
+        <createIndex tableName="unidade_administrativa" indexName="IDX_UnidadeAdministrativa_FKEmpresa">
+            <column name="fk_empresa"/>
+        </createIndex>
+        <createIndex tableName="unidade_administrativa" indexName="IDX_UnidadeAdministrativa_FKUnidadeAdministrativaSuperior">
+            <column name="fk_unidade_administrativa_superior"/>
+        </createIndex>
+
+        <createTable tableName="cargo">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Cargo"/>
+            </column>
+            <column name="nome" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fk_empresa" type="bigint">
+                <constraints references="empresa(id)" deleteCascade="false" foreignKeyName="FK_Cargo_Empresa"/>
+            </column>
+        </createTable>
+        <createIndex tableName="cargo" indexName="IDX_Cargo_FKEmpresa">
+            <column name="fk_empresa"/>
+        </createIndex>
+
+        <createTable tableName="colaborador">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Colaborador"/>
+            </column>
+            <column name="dataCadastro" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nome" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cpf" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="telefone" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fk_empresa" type="bigint">
+                <constraints references="empresa(id)" deleteCascade="false" foreignKeyName="FK_Colaborador_Empresa"/>
+            </column>
+            <column name="email" type="varchar(255)"/>
+            <column name="cep" type="bigint"/>
+            <column name="logradouro" type="varchar(255)"/>
+            <column name="complemento" type="varchar(255)"/>
+            <column name="numeroLogradouro" type="bigint"/>
+            <column name="bairro" type="varchar(255)"/>
+            <column name="cidade" type="varchar(255)"/>
+            <column name="estado" type="varchar(2)"/>
+        </createTable>
+        <createIndex tableName="colaborador" indexName="IDX_Colaborador_FKEmpresa">
+            <column name="fk_empresa"/>
+        </createIndex>
+
     </changeSet>
 
 </databaseChangeLog>
