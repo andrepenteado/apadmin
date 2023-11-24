@@ -19,19 +19,19 @@
               <div class="row mb-3">
                 <div class="form-group col-12 col-md-12">
                   <label>* Nome</label>
-                  <input type="text" name="razaoSocial" formControlName="razaoSocial" class="form-control" required="true">
-                  <div class="invalid-feedback">Razão social é um campo obrigatório</div>
+                  <input type="text" name="nome" formControlName="nome" class="form-control" required="true">
+                  <div class="invalid-feedback">Nome é um campo obrigatório</div>
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="form-group col-12 col-md-12">
                   <label>Tipo</label>
                   <div class="m-t-15 m-checkbox-inline mb-0 custom-radio-ml ml-2">
-                    <div class="form-check form-check-inline">
-                      <input type="radio" class="form-check-input" id="tipo_1" name="tipo" formControlName="tipo" [value]="1"/>
-                      <label for="tipo_1" class="mb-0">Diretoria</label>
+                    <div class="form-check form-check-inline" *ngFor="let t of tipos">
+                      <input type="radio" class="form-check-input" id="tipo_1" name="tipo" formControlName="tipo" [value]="t"/>
+                      <label for="tipo_{{ t }}" class="mb-0">{{ enumTipo[t] }}</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <!--<div class="form-check form-check-inline">
                       <input type="radio" class="form-check-input" id="tipo_2" name="tipo" formControlName="tipo" [value]="2"/>
                       <label for="tipo_2" class="mb-0">Unidade</label>
                     </div>
@@ -58,7 +58,7 @@
                     <div class="form-check form-check-inline">
                       <input type="radio" class="form-check-input" id="tipo_8" name="tipo" formControlName="tipo" [value]="8"/>
                       <label for="tipo_8" class="mb-0">Equipe</label>
-                    </div>
+                    </div>-->
                   </div>
                 </div>
               </div>

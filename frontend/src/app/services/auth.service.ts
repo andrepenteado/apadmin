@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserLogin } from "../model/dto/user-login";
+import { UserLogin } from "../model/dtos/user-login";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";

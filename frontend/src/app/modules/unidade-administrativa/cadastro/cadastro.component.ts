@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ExibeMensagemComponent } from "../../core/components/exibe-mensagem.component";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { TipoUnidadeAdministrativa } from "../../../model/enums/tipo-unidade-administrativa";
 
 @Component({
   selector: 'app-cadastro',
@@ -15,6 +16,9 @@ export class CadastroComponent {
 
   formUnidadeAdministrativaEnviado = false;
   dataCadastroFormatada = new Date();
+
+  tipos = Object.keys(TipoUnidadeAdministrativa);
+  enumTipo: { [key: string]: TipoUnidadeAdministrativa } = TipoUnidadeAdministrativa;
 
   id = new FormControl(null);
   dataCadastro = new FormControl(null);
