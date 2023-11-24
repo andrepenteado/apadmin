@@ -60,6 +60,7 @@ public class EmpresaResourceTest {
         if (id != null)
             empresa.setId(id);
         empresa.setDataCadastro(LocalDateTime.now());
+        empresa.setUsuarioCadastro("admin");
         empresa.setRazaoSocial(RAZAO_SOCIAL);
         empresa.setCnpj(CNPJ);
         empresa.setTelefone("123123123");
@@ -74,11 +75,11 @@ public class EmpresaResourceTest {
     @DisplayName("Listar todas empresas")
     void testListar() throws Exception {
         String json = mockMvc.perform(get("/empresas")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn()
-                .getResponse()
-                .getContentAsString();
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
         List<Empresa> lista = objectMapper.readValue(json, new TypeReference<List<Empresa>>() {});
         assertEquals(lista.size(), 2);
     }
@@ -87,24 +88,24 @@ public class EmpresaResourceTest {
     @DisplayName("Buscar empresa por ID")
     void testBuscar() throws Exception {
         mockMvc.perform(get("/empresas/100")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk());
         mockMvc.perform(get("/empresas/999")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNotFound());
     }
 
     @Test
     @DisplayName("Incluir nova empresa")
     void testIncluir() throws Exception {
         String json = mockMvc.perform(post("/empresas")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .content(getJsonEmpresa(-1L)))
-                .andExpect(status().isOk())
-                .andReturn()
-                .getResponse()
-                .getContentAsString();
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(getJsonEmpresa(-1L)))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
         Empresa empresaNovo = objectMapper.readValue(json, Empresa.class);
         assertEquals(empresaNovo.getRazaoSocial(), RAZAO_SOCIAL);
         assertNotNull(empresaNovo.getId());
@@ -146,7 +147,7 @@ public class EmpresaResourceTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .content(getJsonEmpresa(100L)))
             .andExpect(status().isNotFound())
-            .andExpect(ex -> assertTrue(ex.getResolvedException().getMessage().contains("não encontrado")));
+            .andExpect(ex -> assertTrue(ex.getResolvedException().getMessage().contains("não encontrada")));
 
         mockMvc.perform(put("/empresas/100")
                 .contentType(MediaType.APPLICATION_JSON)

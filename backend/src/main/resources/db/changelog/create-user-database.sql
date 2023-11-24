@@ -1,7 +1,7 @@
 CREATE DATABASE "apadmin-dbname";
 CREATE USER "apadmin-dbuser" WITH SUPERUSER ENCRYPTED PASSWORD 'apadmin-dbpasswd';
 
-CONNECT TO "apsso-dbname";
+\c "apsso-dbname";
 
 INSERT INTO public.oauth2_registered_client (
     id, client_name, data_cadastro, url_entrada, client_id, client_id_issued_at, client_secret, client_secret_expires_at, client_authentication_methods,

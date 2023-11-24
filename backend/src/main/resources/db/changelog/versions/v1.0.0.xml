@@ -11,15 +11,15 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" primaryKeyName="PK_Empresa"/>
             </column>
-            <column name="dataCadastro" type="datetime">
+            <column name="data_cadastro" type="datetime">
                 <constraints nullable="false"/>
             </column>
-            <column name="dataUltimaAtualizacao" type="datetime"/>
-            <column name="usuarioCadastro" type="varchar(50)">
+            <column name="data_ultima_atualizacao" type="datetime"/>
+            <column name="usuario_cadastro" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="usuarioUltimaAtualizacao" type="varchar(50)"/>
-            <column name="razaoSocial" type="varchar(255)">
+            <column name="usuario_ultima_atualizacao" type="varchar(50)"/>
+            <column name="razao_social" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="cnpj" type="bigint">
@@ -31,12 +31,12 @@
             <column name="fk_empresa_matriz" type="bigint">
                 <constraints references="empresa(id)" deleteCascade="false" foreignKeyName="FK_Empresa_EmpresaMatriz"/>
             </column>
-            <column name="nomeFantasia" type="varchar(255)"/>
+            <column name="nome_fantasia" type="varchar(255)"/>
             <column name="email" type="varchar(255)"/>
             <column name="cep" type="bigint"/>
             <column name="logradouro" type="varchar(255)"/>
             <column name="complemento" type="varchar(255)"/>
-            <column name="numeroLogradouro" type="bigint"/>
+            <column name="numero_logradouro" type="bigint"/>
             <column name="bairro" type="varchar(255)"/>
             <column name="cidade" type="varchar(255)"/>
             <column name="estado" type="varchar(2)"/>
@@ -88,14 +88,14 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" primaryKeyName="PK_Colaborador"/>
             </column>
-            <column name="dataCadastro" type="datetime">
+            <column name="data_cadastro" type="datetime">
                 <constraints nullable="false"/>
             </column>
-            <column name="dataUltimaAtualizacao" type="datetime"/>
-            <column name="usuarioCadastro" type="varchar(50)">
+            <column name="data_ultima_atualizacao" type="datetime"/>
+            <column name="usuario_cadastro" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="usuarioUltimaAtualizacao" type="varchar(50)"/>
+            <column name="usuario_ultima_atualizacao" type="varchar(50)"/>
             <column name="nome" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
@@ -115,7 +115,7 @@
             <column name="cep" type="bigint"/>
             <column name="logradouro" type="varchar(255)"/>
             <column name="complemento" type="varchar(255)"/>
-            <column name="numeroLogradouro" type="bigint"/>
+            <column name="numero_logradouro" type="bigint"/>
             <column name="bairro" type="varchar(255)"/>
             <column name="cidade" type="varchar(255)"/>
             <column name="estado" type="varchar(2)"/>

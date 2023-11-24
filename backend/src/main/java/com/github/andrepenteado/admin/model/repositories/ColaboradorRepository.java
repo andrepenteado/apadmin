@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface ColaboradorRepository extends JpaRepository<Colaborador, Long> {
 
-    List<Colaborador> findAllByOOrderByNomeAsc();
+    List<Colaborador> findAllByOrderByNomeAsc();
+
+    Colaborador findByCpf(Long cpf);
 
 }

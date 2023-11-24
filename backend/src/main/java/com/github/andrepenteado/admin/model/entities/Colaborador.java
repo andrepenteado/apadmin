@@ -24,7 +24,7 @@ public class Colaborador {
     @NotNull(message = "Usuário responsável pelo cadastro é um campo obrigatório")
     private String usuarioCadastro;
 
-    private String usuarioUltimaModificacao;
+    private String usuarioUltimaAtualizacao;
 
     @NotNull(message = "Nome é um campo obrigatório")
     private String nome;
@@ -93,12 +93,12 @@ public class Colaborador {
         this.usuarioCadastro = usuarioCadastro;
     }
 
-    public String getUsuarioUltimaModificacao() {
-        return usuarioUltimaModificacao;
+    public String getUsuarioUltimaAtualizacao() {
+        return usuarioUltimaAtualizacao;
     }
 
-    public void setUsuarioUltimaModificacao(String usuarioUltimaModificacao) {
-        this.usuarioUltimaModificacao = usuarioUltimaModificacao;
+    public void setUsuarioUltimaAtualizacao(String usuarioUltimaAtualizacao) {
+        this.usuarioUltimaAtualizacao = usuarioUltimaAtualizacao;
     }
 
     public String getNome() {

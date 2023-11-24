@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.andrepenteado.admin.model.entities.Empresa;
 import com.github.andrepenteado.admin.model.entities.UnidadeAdministrativa;
+import com.github.andrepenteado.admin.model.enums.TipoUnidadeAdministrativa;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.jupiter.api.DisplayName;
@@ -22,6 +23,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,12 +55,23 @@ public class UnidadeAdministrativaTest {
 
     private final String NOME = "Unidade administrativa de testes";
 
+    private Empresa getEmpresa() {
+        Empresa empresa = new Empresa();
+        empresa.setId(10L);
+        empresa.setDataCadastro(LocalDateTime.now());
+        empresa.setRazaoSocial("Empresa testes");
+        empresa.setCnpj(123123123000112L);
+        empresa.setTelefone("123123123");
+        return empresa;
+    }
+
     private UnidadeAdministrativa getUnidadeAdministrativa(Long id) {
         UnidadeAdministrativa unidadeAdministrativa = new UnidadeAdministrativa();
         if (id != null)
             unidadeAdministrativa.setId(id);
         unidadeAdministrativa.setNome(NOME);
-        unidadeAdministrativa.setEmpresa(new Empresa());
+        unidadeAdministrativa.setEmpresa(getEmpresa());
+        unidadeAdministrativa.setTipo(TipoUnidadeAdministrativa.DIRETORIA);
         return unidadeAdministrativa;
     }
 

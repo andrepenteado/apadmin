@@ -2,8 +2,9 @@
 
     <empresa
         id="10"
-        dataCadastro="[now]"
-        razaoSocial="Empresa 10"
+        data_cadastro="[now]"
+        usuario_cadastro="admin"
+        razao_social="Empresa 10"
         cnpj="000000000000010"
         telefone="100100100"
     />

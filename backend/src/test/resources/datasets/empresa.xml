@@ -2,15 +2,17 @@
 
     <empresa
         id="100"
-        dataCadastro="[now]"
-        razaoSocial="Empresa 100"
+        data_cadastro="[now]"
+        usuario_cadastro="admin"
+        razao_social="Empresa 100"
         cnpj="000000000000100"
         telefone="100100100"
     />
     <empresa
         id="200"
-        dataCadastro="[now]"
-        razaoSocial="Empresa 200"
+        data_cadastro="[now]"
+        usuario_cadastro="admin"
+        razao_social="Empresa 200"
         cnpj="000000000000200"
         telefone="200200200"
     />

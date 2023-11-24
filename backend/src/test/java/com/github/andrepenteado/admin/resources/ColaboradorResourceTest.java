@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.andrepenteado.admin.model.entities.Cargo;
 import com.github.andrepenteado.admin.model.entities.Colaborador;
+import com.github.andrepenteado.admin.model.entities.Empresa;
 import com.github.andrepenteado.admin.model.entities.UnidadeAdministrativa;
+import com.github.andrepenteado.admin.model.enums.TipoUnidadeAdministrativa;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +25,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,13 +59,44 @@ public class ColaboradorResourceTest {
 
     private final Long CPF = 12345678901L;
 
+    private Empresa getEmpresa() {
+        Empresa empresa = new Empresa();
+        empresa.setId(10L);
+        empresa.setDataCadastro(LocalDateTime.now());
+        empresa.setRazaoSocial("Empresa testes");
+        empresa.setCnpj(123123123000112L);
+        empresa.setTelefone("123123123");
+        return empresa;
+    }
+
+    private UnidadeAdministrativa getUnidadeAdministrativa() {
+        UnidadeAdministrativa unidadeAdministrativa = new UnidadeAdministrativa();
+        unidadeAdministrativa.setId(10L);
+        unidadeAdministrativa.setNome(NOME);
+        unidadeAdministrativa.setEmpresa(getEmpresa());
+        unidadeAdministrativa.setTipo(TipoUnidadeAdministrativa.DIRETORIA);
+        return unidadeAdministrativa;
+    }
+
+    private Cargo getCargo() {
+        Cargo cargo = new Cargo();
+        cargo.setId(10L);
+        cargo.setNome(NOME);
+        cargo.setEmpresa(getEmpresa());
+        return cargo;
+    }
+
     private Colaborador getColaborador(Long id) {
         Colaborador colaborador = new Colaborador();
+        if (id != null)
+            colaborador.setId(id);
+        colaborador.setDataCadastro(LocalDateTime.now());
+        colaborador.setUsuarioCadastro("admin");
         colaborador.setNome(NOME);
         colaborador.setCpf(CPF);
         colaborador.setTelefone("123123123");
-        colaborador.setUnidadeAdministrativa(new UnidadeAdministrativa());
-        colaborador.setCargo(new Cargo());
+        colaborador.setUnidadeAdministrativa(getUnidadeAdministrativa());
+        colaborador.setCargo(getCargo());
         return colaborador;
     }
 

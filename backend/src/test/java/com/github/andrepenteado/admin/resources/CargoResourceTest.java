@@ -22,6 +22,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,10 +55,22 @@ public class CargoResourceTest {
 
     private final String NOME = "Cargo de testes";
 
+    private Empresa getEmpresa() {
+        Empresa empresa = new Empresa();
+        empresa.setId(10L);
+        empresa.setDataCadastro(LocalDateTime.now());
+        empresa.setRazaoSocial("Empresa testes");
+        empresa.setCnpj(123123123000112L);
+        empresa.setTelefone("123123123");
+        return empresa;
+    }
+
     private Cargo getCargo(Long id) {
         Cargo cargo = new Cargo();
+        if (id != null)
+            cargo.setId(id);
         cargo.setNome(NOME);
-        cargo.setEmpresa(new Empresa());
+        cargo.setEmpresa(getEmpresa());
         return cargo;
     }
 
