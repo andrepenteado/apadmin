@@ -56,6 +56,11 @@ public class Colaborador {
     @NotNull(message = "Unidade administrativa é um campo obrigatório")
     private UnidadeAdministrativa unidadeAdministrativa;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_cargo")
+    @NotNull(message = "Cargo é um campo obrigatório")
+    private Cargo cargo;
+
     public Long getId() {
         return id;
     }
@@ -190,6 +195,14 @@ public class Colaborador {
 
     public void setUnidadeAdministrativa(UnidadeAdministrativa unidadeAdministrativa) {
         this.unidadeAdministrativa = unidadeAdministrativa;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 
     @Override

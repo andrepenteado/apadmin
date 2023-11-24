@@ -1,0 +1,18 @@
+<dataset>
+
+    <empresa
+        id="100"
+        dataCadastro="[now]"
+        razaoSocial="Empresa 100"
+        cnpj="000000000000100"
+        telefone="100100100"
+    />
+    <empresa
+        id="200"
+        dataCadastro="[now]"
+        razaoSocial="Empresa 200"
+        cnpj="000000000000200"
+        telefone="200200200"
+    />
+
+</dataset>
