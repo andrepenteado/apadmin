@@ -1,0 +1,16 @@
+services:
+
+  dev.admin.apcode.com.br:
+    image: ghcr.io/andrepenteado/apadmin
+    container_name: admin
+    hostname: admin
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - 30003:8080
+    networks:
+      - docker-host-network
+
+networks:
+  docker-host-network:
+    external: true

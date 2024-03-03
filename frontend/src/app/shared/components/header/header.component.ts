@@ -26,10 +26,15 @@ export class HeaderComponent implements OnInit {
   }
 
   layoutToggle() {
-    if ((this.layout.config.settings.layout_version = "dark-only")) {
-      document.body.classList.toggle("dark-only");
+    if (this.layout.config.settings.layout_version == "dark-only") {
+        document.body.classList.remove("dark-only");
+        document.body.classList.add("dark-sidebar");
+        this.layout.config.settings.layout_version = "dark-sidebar"
+    } else if (this.layout.config.settings.layout_version == "dark-sidebar") {
+        document.body.classList.remove("dark-sidebar");
+        document.body.classList.add("dark-only");
+        this.layout.config.settings.layout_version = "dark-only"
     }
-    document.body.remove;
   }
 
   searchToggle() {

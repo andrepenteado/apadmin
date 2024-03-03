@@ -1,3 +1,5 @@
+<app-loader [show]="this.aguardar"></app-loader>
+
 <app-breadcrumb
   [title]="'Cadastro de Empresa'"
   [items]="[ ['Pesquisar','/empresa/pesquisar'] ]"
@@ -9,11 +11,12 @@
     <li ngbNavItem="dados-cadastrais">
       <a ngbNavLink>Dados Cadastrais</a>
       <ng-template ngbNavContent>
-        <form [formGroup]="formEmpresa" [ngClass]="{'was-validated': !formEmpresa.valid && formEmpresaEnviado}">
+        <form [formGroup]="form" [ngClass]="{'was-validated': !form.valid && formEnviado}">
           <div class="card border border-primary rounded shadow-lg">
             <div class="card-header">
               <h5>Dados Cadastrais</h5>
-              <span>{{ dataCadastroFormatada | date: "'Cadastrada em' EEEE, dd 'de' MMMM 'de' yyyy 'às' HH:mm" }}</span>
+              <span>{{ dataCadastro | date: "'Cadastrada em' EEEE, dd 'de' MMMM 'de' yyyy 'às' HH:mm" }}</span>
+              <span>{{ dataUltimaModificacao | date: "'Modificado em ' EEEE, dd 'de' MMMM 'de' yyyy 'às' HH:mm" }}</span>
             </div>
             <div class="card-body">
               <div class="row mb-3">

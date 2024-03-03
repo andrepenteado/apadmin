@@ -15,13 +15,11 @@ public class Empresa {
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    @NotNull(message = "Data de cadastro é um campo obrigatório")
     private LocalDateTime dataCadastro;
 
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private LocalDateTime dataUltimaAtualizacao;
 
-    @NotNull(message = "Usuário responsável pelo cadastro é um campo obrigatório")
     private String usuarioCadastro;
 
     private String usuarioUltimaAtualizacao;

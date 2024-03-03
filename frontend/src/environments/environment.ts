@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   backendURL:  window.location.protocol + '//' + window.location.host,
-  portalURL: window.location.protocol + '//' + window.location.host.replace('aproove.', 'portal.').replace('30003','30002')
+  portalURL: window.location.protocol + '//' + window.location.host.replace('admin.', 'portal.').replace('30003','30002')
 };
 
 /*

@@ -7,6 +7,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { SharedModule } from "../../shared/shared.module";
 import { CoreModule } from "../core/core.module";
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask";
+import { DataTablesModule } from "angular-datatables";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask";
     SharedModule,
     CoreModule,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    DataTablesModule
   ],
   providers: [provideNgxMask()]
 })

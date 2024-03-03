@@ -1,7 +1,7 @@
 spring:
 
   application:
-    name: apadmin
+    name: admin
 
   datasource:
     url: jdbc:postgresql://db.apcode.com.br/apadmin-dbname

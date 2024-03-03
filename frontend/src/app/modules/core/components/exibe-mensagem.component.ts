@@ -50,7 +50,6 @@ export class ExibeMensagemComponent implements OnInit {
       this.decoracao = decoracao;
     if (titulo != null)
       this.titulo = titulo;
-    console.log(this.decoracao);
   }
 
 }

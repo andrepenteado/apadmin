@@ -2,8 +2,9 @@
   <configuration default="false" name="Admin UP" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <option name="ACTIVE_PROFILES" value="dev" />
     <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-    <module name="admin" />
+    <module name="backend" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.github.andrepenteado.admin.AdminApplication" />
+    <option name="VM_PARAMETERS" value="-Dserver.port=30003" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
