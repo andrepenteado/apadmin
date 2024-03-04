@@ -17,15 +17,15 @@ export class AuthService {
   ) { }
 
   public async usuarioLogado(): Promise<UserLogin> {
-    let userLogin = new UserLogin(); //JSON.parse(sessionStorage.getItem("usuarioLogado")!) as UserLogin;
-    /*if (userLogin == null) {
+    let userLogin = JSON.parse(sessionStorage.getItem("usuarioLogado")) as UserLogin;
+    if (userLogin == null) {
       const userLogin$ = this.http.get<UserLogin>(`${environment.backendURL}${Api.AUTH}/usuario`);
       userLogin = await lastValueFrom(userLogin$);
       if (userLogin != null)
         sessionStorage.setItem("usuarioLogado", JSON.stringify(userLogin));
     }
     if (!this.isPermitido(userLogin))
-      await this.router.navigate(["/pages/acesso-negado"]);*/
+      await this.router.navigate(["/pages/acesso-negado"]);
     return userLogin;
   }
 
@@ -40,11 +40,10 @@ export class AuthService {
   }
 
   public nomePerfil(userLogin: UserLogin): string {
-    /*for (const nome of Object.keys(userLogin.perfis)) {
-      console.log(nome);
-      if (nome.startsWith("ROLE_AProove_"))
-        return userLogin.perfis.get(nome)!;
-    }*/
+    for (const nome of Object.keys(userLogin.perfis)) {
+      if (nome.startsWith("ROLE_Admin_"))
+        return nome.replace("ROLE_Admin_","");
+    }
     return "Sem Perfil";
   }
 

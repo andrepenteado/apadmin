@@ -9,18 +9,17 @@ import { AuthService } from "../../../../../services/auth.service";
 })
 export class MyAccountComponent implements OnInit {
 
-  userLogin!: UserLogin;
+  nomeUsuario: string;
+  nomePerfil: string;
 
   constructor(
     private authService: AuthService
   ) { }
 
   async ngOnInit() {
-    this.userLogin = await this.authService.usuarioLogado();
-  }
-
-  nomePerfil(): string {
-    return this.authService.nomePerfil(this.userLogin);
+    var userLogin: UserLogin = await this.authService.usuarioLogado();
+    this.nomeUsuario = userLogin.nome;
+    this.nomePerfil = this.authService.nomePerfil(userLogin);
   }
 
   logout(): void {
