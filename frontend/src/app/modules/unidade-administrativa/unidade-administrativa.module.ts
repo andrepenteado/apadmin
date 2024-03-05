@@ -6,6 +6,8 @@ import { PesquisarComponent } from './pesquisar/pesquisar.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { SharedModule } from "../../shared/shared.module";
 import { CoreModule } from "../core/core.module";
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask"
+import { DataTablesModule } from "angular-datatables"
 
 
 @NgModule({
@@ -17,7 +19,11 @@ import { CoreModule } from "../core/core.module";
     CommonModule,
     UnidadeAdministrativaRoutingModule,
     SharedModule,
-    CoreModule
-  ]
+    CoreModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
+    DataTablesModule
+  ],
+  providers: [provideNgxMask()]
 })
 export class UnidadeAdministrativaModule { }

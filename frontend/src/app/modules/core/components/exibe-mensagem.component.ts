@@ -15,7 +15,7 @@ export enum DecoracaoMensagem {
 @Component({
   selector: 'ap-exibe-mensagem',
   template: `
-      <ngb-toast header="{{ titulo }}" *ngIf="exibir" (hidden)="exibir = false" class="{{ decoracao }} toast-container position-fixed top-0 end-0 mt-4 me-4">
+      <ngb-toast *ngIf="exibir" (hidden)="exibir = false" class="{{ decoracao }} toast-container position-fixed top-0 end-0 mt-4 me-4">
           {{ mensagem }}<br><br>
       </ngb-toast>
   `,

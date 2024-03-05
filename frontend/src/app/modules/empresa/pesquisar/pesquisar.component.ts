@@ -62,17 +62,17 @@ export class PesquisarComponent implements OnInit, OnDestroy {
   }
 
   incluir(): void {
-    this.router.navigate([`/sistema/cadastro`]);
+    this.router.navigate([`/empresa/cadastro`]);
   }
 
   editar(empresa): void {
-    this.router.navigate([`/sistema/cadastro/${empresa.id}`]);
+    this.router.navigate([`/empresa/cadastro/${empresa.id}`]);
   }
 
   excluir(empresa): void {
     Swal.fire({
       title: 'Excluir?',
-      text: `Confirma a exclusão do sistema ${empresa.nomeFantasia}`,
+      text: `Confirma a exclusão da empresa ${empresa.nomeFantasia}`,
       icon: 'question',
       showCloseButton: true,
       showCancelButton: true,
