@@ -1,5 +1,6 @@
 package com.github.andrepenteado.admin.services.impl;
 
+import com.github.andrepenteado.admin.model.entities.Empresa;
 import com.github.andrepenteado.admin.model.entities.UnidadeAdministrativa;
 import com.github.andrepenteado.admin.model.repositories.UnidadeAdministrativaRepository;
 import com.github.andrepenteado.admin.services.UnidadeAdministrativaService;
@@ -25,6 +26,11 @@ public class UnidadeAdministrativaServiceImpl implements UnidadeAdministrativaSe
     @Override
     public List<UnidadeAdministrativa> listar() {
         return repository.findAllByOrderByNomeAsc();
+    }
+
+    @Override
+    public List<UnidadeAdministrativa> listarPorEmpresa(Long idEmpresa) {
+        return repository.findByEmpresa_Id(idEmpresa);
     }
 
     @Override

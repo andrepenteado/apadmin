@@ -1,3 +1,6 @@
+import { Cargo } from "./cargo";
+import { UnidadeAdministrativa } from "./unidade-administrativa";
+
 export class Colaborador {
 
   id: number;
@@ -16,5 +19,7 @@ export class Colaborador {
   bairro: string;
   cidade: string;
   estado: string;
+  cargo: Cargo;
+  unidadeAdministrativa: UnidadeAdministrativa;
 
 }

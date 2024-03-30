@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject } from "rxjs";
-import { Core } from "../../../config/core";
-import { DecoracaoMensagem, ExibeMensagemComponent } from "../../core/components/exibe-mensagem.component";
 import { Empresa } from "../../../model/entities/empresa";
 import { EmpresaService } from "../../../services/empresa.service";
 import { Router } from "@angular/router";
-import Swal from 'sweetalert2';
+import { DATATABLES_OPTIONS } from "../../../etc/datatables"
+import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/widgets/exibir-mensagem.service"
+import { DataTableDirective } from "angular-datatables";
 
 @Component({
   selector: 'app-pesquisar',
@@ -13,85 +13,85 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class PesquisarComponent implements OnInit, OnDestroy {
+export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
 
-  @ViewChild('exibeMensagem')
-  exibeMensagem: ExibeMensagemComponent = new ExibeMensagemComponent();
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement: DataTableDirective;
 
-  aguardar = true;
-
-  dtOptions: DataTables.Settings = Core.DATATABLES_OPTIONS;
+  dtOptions: DataTables.Settings = DATATABLES_OPTIONS;
   dtTrigger: Subject<any> = new Subject<any>();
 
-  lista: Empresa[];
+  lista: Empresa[] = [];
 
   constructor(
     private empresaService: EmpresaService,
-    private router: Router
+    private router: Router,
+    private exibirMensagem: ExibirMensagemService
   ) { }
+
+  ngAfterViewInit(): void {
+    this.dtTrigger.next(null);
+  }
 
   ngOnInit(): void {
     this.pesquisar();
   }
 
   ngOnDestroy(): void {
-    // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
 
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      this.dtTrigger.next(null);
+    });
+  }
+
   pesquisar(): void {
-    this.empresaService.listar().subscribe({
-      next: listaEmpresas => {
-        this.lista = listaEmpresas;
-        this.dtTrigger.next(null);
-        this.aguardar = false;
-      },
-      error: objetoErro => {
-        if (objetoErro.error.status == "403") {
-          this.router.navigate(["/pages/acesso-negado"]);
-        }
-        else {
-          this.exibeMensagem.show(
-            `${objetoErro.error.detail}`,
-            DecoracaoMensagem.ERRO,
-            'Erro no processamento'
-          );
+    this.empresaService
+      .listar()
+      .subscribe({
+        next: listaEmpresas => {
+          this.lista = listaEmpresas;
+          this.rerender();
+        },
+        error: objetoErro => {
+          if (objetoErro.error.status == "403") {
+            this.router.navigate(["/acesso-negado"]);
+          }
+          else {
+            this.exibirMensagem.showMessage(`${objetoErro.error.detail}`, "Erro de processamento", DecoracaoMensagem.ERRO);
+          }
         }
       }
-    })
+    );
   }
 
   incluir(): void {
     this.router.navigate([`/empresa/cadastro`]);
   }
 
-  editar(empresa): void {
+  editar(empresa: Empresa): void {
     this.router.navigate([`/empresa/cadastro/${empresa.id}`]);
   }
 
-  excluir(empresa): void {
-    Swal.fire({
-      title: 'Excluir?',
-      text: `Confirma a exclusão da empresa ${empresa.nomeFantasia}`,
-      icon: 'question',
-      showCloseButton: true,
-      showCancelButton: true,
-      confirmButtonText: '<i class=\'fa fa-trash\'></i> Sim, Excluir',
-      cancelButtonText: 'Cancelar'
-    }).then((resposta) => {
-      if (resposta.value) {
-        this.empresaService.excluir(empresa.id).subscribe({
-          next: () => this.pesquisar(),
-          error: objetoErro => {
-            this.exibeMensagem.show(
-              `${objetoErro.error.detail}`,
-              DecoracaoMensagem.ERRO,
-              'Erro de processamento'
-            );
-          }
-        });
+  excluir(empresa: Empresa): void {
+    this.exibirMensagem
+      .showConfirm(`Confirma a exclusão da empresa ${empresa.nomeFantasia}`, "Excluir?")
+      .then((resposta) => {
+        if (resposta.value) {
+          this.empresaService.excluir(empresa.id).subscribe({
+            next: () => {
+              this.pesquisar()
+            },
+            error: objetoErro => {
+              this.exibirMensagem.showMessage(`${objetoErro.error.detail}`, "Erro de processamento", DecoracaoMensagem.ERRO);
+            }
+          });
+        }
       }
-    });
+    );
   }
 
 }

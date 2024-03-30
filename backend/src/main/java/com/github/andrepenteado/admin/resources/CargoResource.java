@@ -1,7 +1,9 @@
 package com.github.andrepenteado.admin.resources;
 
 import com.github.andrepenteado.admin.model.entities.Cargo;
+import com.github.andrepenteado.admin.model.entities.Empresa;
 import com.github.andrepenteado.admin.services.CargoService;
+import com.github.andrepenteado.admin.services.EmpresaService;
 import io.micrometer.observation.annotation.Observed;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,8 @@ public class CargoResource {
 
     private final CargoService service;
 
+    private final EmpresaService empresaService;
+
     @GetMapping
     public List<Cargo> listar() {
         log.info("Listar todos cargos");
@@ -34,12 +38,24 @@ public class CargoResource {
         }
     }
 
+    @GetMapping("/empresa/{idEmpresa}")
+    public List<Cargo> listarPorEmpresa(@PathVariable Long idEmpresa) {
+        log.info("Listar cargos por empresa de ID #{}", idEmpresa);
+        try {
+            return service.listarPorEmpresa(idEmpresa);
+        }
+        catch (Exception ex) {
+            log.error("Erro no processamento", ex);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro no processamento");
+        }
+    }
+
     @GetMapping("/{id}")
     public Cargo buscar(@PathVariable Long id) {
         log.info("Buscar cargo por ID #{}", id);
         try {
             return service.buscar(id)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Empresa de ID #%n não encontrada", id)));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Cargo de ID #%n não encontrada", id)));
         }
         catch (ResponseStatusException rsex) {
             throw rsex;

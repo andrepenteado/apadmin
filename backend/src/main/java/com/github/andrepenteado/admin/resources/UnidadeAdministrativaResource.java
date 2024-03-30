@@ -1,5 +1,6 @@
 package com.github.andrepenteado.admin.resources;
 
+import com.github.andrepenteado.admin.model.entities.Cargo;
 import com.github.andrepenteado.admin.model.entities.UnidadeAdministrativa;
 import com.github.andrepenteado.admin.services.UnidadeAdministrativaService;
 import io.micrometer.observation.annotation.Observed;
@@ -27,6 +28,18 @@ public class UnidadeAdministrativaResource {
         log.info("Listar todas unidades administrativas");
         try {
             return service.listar();
+        }
+        catch (Exception ex) {
+            log.error("Erro no processamento", ex);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro no processamento");
+        }
+    }
+
+    @GetMapping("/empresa/{idEmpresa}")
+    public List<UnidadeAdministrativa> listarPorEmpresa(@PathVariable Long idEmpresa) {
+        log.info("Listar unidades administrativas por empresa de ID #{}", idEmpresa);
+        try {
+            return service.listarPorEmpresa(idEmpresa);
         }
         catch (Exception ex) {
             log.error("Erro no processamento", ex);

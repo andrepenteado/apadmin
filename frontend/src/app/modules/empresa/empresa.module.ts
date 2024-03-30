@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { EmpresaRoutingModule } from './empresa-routing.module';
 import { PesquisarComponent } from './pesquisar/pesquisar.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
-import { SharedModule } from "../../shared/shared.module";
-import { CoreModule } from "../core/core.module";
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask";
 import { DataTablesModule } from "angular-datatables";
-
+import { CoreModule } from "../../libs/core/core.module"
+import { NgbToast } from "@ng-bootstrap/ng-bootstrap"
+import { ReactiveFormsModule } from "@angular/forms"
 
 @NgModule({
   declarations: [
@@ -18,11 +18,11 @@ import { DataTablesModule } from "angular-datatables";
   imports: [
     CommonModule,
     EmpresaRoutingModule,
-    SharedModule,
-    CoreModule,
     NgxMaskDirective,
     NgxMaskPipe,
-    DataTablesModule
+    DataTablesModule,
+    CoreModule,
+    ReactiveFormsModule
   ],
   providers: [provideNgxMask()]
 })

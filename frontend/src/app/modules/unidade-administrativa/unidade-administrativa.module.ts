@@ -4,10 +4,9 @@ import { CommonModule } from '@angular/common';
 import { UnidadeAdministrativaRoutingModule } from './unidade-administrativa-routing.module';
 import { PesquisarComponent } from './pesquisar/pesquisar.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
-import { SharedModule } from "../../shared/shared.module";
-import { CoreModule } from "../core/core.module";
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask"
-import { DataTablesModule } from "angular-datatables"
+import { CoreModule } from "../../libs/core/core.module";
+import { DataTablesModule } from "angular-datatables";
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -18,12 +17,9 @@ import { DataTablesModule } from "angular-datatables"
   imports: [
     CommonModule,
     UnidadeAdministrativaRoutingModule,
-    SharedModule,
     CoreModule,
-    NgxMaskDirective,
-    NgxMaskPipe,
-    DataTablesModule
-  ],
-  providers: [provideNgxMask()]
+    DataTablesModule,
+    ReactiveFormsModule
+  ]
 })
 export class UnidadeAdministrativaModule { }

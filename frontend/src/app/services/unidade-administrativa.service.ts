@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { UnidadeAdministrativa } from "../model/entities/unidade-administrativa";
-import { environment } from "../../environments/environment";
-import { Api } from "../config/api";
+import { SISTEMA_URL } from "../etc/routes"
+import { Api } from "../etc/api"
+import { Empresa } from "../model/entities/empresa";
 
 @Injectable({
   providedIn: 'root'
@@ -15,19 +16,31 @@ export class UnidadeAdministrativaService {
   ) { }
 
   public listar(): Observable<UnidadeAdministrativa[]> {
-    return this.http.get<UnidadeAdministrativa[]>(`${environment.backendURL}${Api.UNIDADES_ADMINISTRATIVAS}`);
+    return this.http.get<UnidadeAdministrativa[]>(`${SISTEMA_URL.backendURL}${Api.UNIDADES_ADMINISTRATIVAS}`);
+  }
+
+  public listarPorEmpresa(idEmpresa: number): Observable<UnidadeAdministrativa[]> {
+    return this.http.get<UnidadeAdministrativa[]>(`${SISTEMA_URL.backendURL}${Api.UNIDADES_ADMINISTRATIVAS}/empresa/${idEmpresa}`);
   }
 
   public buscar(id: number): Observable<UnidadeAdministrativa> {
-    return this.http.get<UnidadeAdministrativa>(`${environment.backendURL}${Api.UNIDADES_ADMINISTRATIVAS}/${id}`);
+    return this.http.get<UnidadeAdministrativa>(`${SISTEMA_URL.backendURL}${Api.UNIDADES_ADMINISTRATIVAS}/${id}`);
   }
 
-  public gravar(unidadeAdministrativa: any): Observable<UnidadeAdministrativa> {
-    return this.http.post<UnidadeAdministrativa>(`${environment.backendURL}${Api.UNIDADES_ADMINISTRATIVAS}`, unidadeAdministrativa);
+  public incluir(unidadeAdministrativa: any): Observable<UnidadeAdministrativa> {
+    return this.http.post<UnidadeAdministrativa>(`${SISTEMA_URL.backendURL}${Api.UNIDADES_ADMINISTRATIVAS}`, unidadeAdministrativa);
+  }
+
+  public alterar(unidadeAdministrativa: any): Observable<UnidadeAdministrativa> {
+    return this.http.put<UnidadeAdministrativa>(`${SISTEMA_URL.backendURL}${Api.UNIDADES_ADMINISTRATIVAS}/${unidadeAdministrativa.id}`, unidadeAdministrativa);
   }
 
   public excluir(id: number): Observable<any> {
-    return this.http.delete(`${environment.backendURL}${Api.UNIDADES_ADMINISTRATIVAS}/${id}`);
+    return this.http.delete(`${SISTEMA_URL.backendURL}${Api.UNIDADES_ADMINISTRATIVAS}/${id}`);
+  }
+
+  public compareFn(ua1: Empresa, ua2: Empresa): boolean {
+    return ua1 && ua2 ? ua1.id === ua2.id : ua1 === ua2;
   }
 
 }

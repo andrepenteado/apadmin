@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { DecoracaoMensagem, ExibeMensagemComponent } from "../../core/components/exibe-mensagem.component";
 import { ActivatedRoute } from "@angular/router";
 import { EmpresaService } from "../../../services/empresa.service";
 import { Empresa } from "../../../model/entities/empresa";
-import { ViaCepService } from "../../../services/via-cep.service";
+import { ViaCepService } from "../../../libs/core/widgets/via-cep.service";
+import { Observable } from "rxjs"
+import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/widgets/exibir-mensagem.service"
 
 @Component({
   selector: 'app-cadastro',
@@ -14,16 +15,16 @@ import { ViaCepService } from "../../../services/via-cep.service";
 })
 export class CadastroComponent implements OnInit {
 
-  @ViewChild('exibeMensagem')
-  exibeMensagem: ExibeMensagemComponent = new ExibeMensagemComponent();
-
-  aguardar = true;
+  incluir = true;
   formEnviado = false;
-  empresa: Empresa;
-  dataCadastro: Date = new Date();
-  dataUltimaModificacao: Date = new Date();
+  empresa = new Empresa();
+  listaEmpresas: Empresa[] = [];
 
   id = new FormControl(null);
+  dataCadastro = new FormControl(null);
+  usuarioCadastro = new FormControl(null);
+  dataUltimaAtualizacao = new FormControl(null);
+  usuarioUltimaAtualizacao = new FormControl(null);
   nomeFantasia = new FormControl(null, Validators.required);
   razaoSocial = new FormControl(null, Validators.required);
   cnpj = new FormControl(null, Validators.required);
@@ -36,8 +37,13 @@ export class CadastroComponent implements OnInit {
   bairro = new FormControl(null);
   cidade = new FormControl(null);
   estado = new FormControl(null);
+  matriz = new FormControl(null);
   form = new FormGroup({
     id: this.id,
+    dataCadastro: this.dataCadastro,
+    usuarioCadastro: this.usuarioCadastro,
+    dataUltimaAtualizacao: this.dataUltimaAtualizacao,
+    usuarioUltimaAtualizacao: this.usuarioUltimaAtualizacao,
     nomeFantasia: this.nomeFantasia,
     razaoSocial: this.razaoSocial,
     cnpj: this.cnpj,
@@ -49,52 +55,73 @@ export class CadastroComponent implements OnInit {
     numeroLogradouro: this.numeroLogradouro,
     bairro: this.bairro,
     cidade: this.cidade,
-    estado: this.estado
+    estado: this.estado,
+    matriz: this.matriz
   });
 
   constructor(
     private activedRoute: ActivatedRoute,
-    private empresaService: EmpresaService,
-    private viaCepService: ViaCepService
+    protected empresaService: EmpresaService,
+    private viaCepService: ViaCepService,
+    private exibirMensagem: ExibirMensagemService
   ) { }
 
   ngOnInit() {
+    this.pesquisarEmpresas();
     this.activedRoute.params.subscribe(params => {
       const id: number = params.id;
-      if (id)
+      if (id) {
+        this.incluir = false;
         this.pesquisar(id);
+      }
     });
-    this.aguardar = false;
   }
 
   pesquisar(id: number) {
     this.empresaService.buscar(id).subscribe(empresa => {
       this.empresa = empresa;
-      this.dataCadastro = new Date(empresa.dataCadastro);
-      this.dataUltimaModificacao = new Date(empresa.dataUltimaAtualizacao);
       this.form.patchValue(empresa);
+      console.log(empresa);
+      this.form.get("matriz").setValue(empresa.matriz);
+    });
+  }
+
+  pesquisarEmpresas(): void {
+    this.empresaService.listar().subscribe({
+      next: listaEmpresas => {
+        this.listaEmpresas = listaEmpresas;
+      }
     });
   }
 
   gravar() {
     this.formEnviado = true;
+
     if (this.form.valid) {
-      this.empresaService.gravar(this.form.value).subscribe({
+      var empresaAtualizada: Observable<Empresa>;
+
+      if (this.incluir)
+        empresaAtualizada = this.empresaService.incluir(this.form.value);
+      else
+        empresaAtualizada = this.empresaService.alterar(this.form.value);
+
+      empresaAtualizada.subscribe({
         next: empresa => {
           this.empresa = empresa;
+          this.incluir = false;
           this.form.reset();
           this.form.patchValue(empresa);
-          this.exibeMensagem.show(
+          this.exibirMensagem.showMessage(
             `Dados da empresa ${empresa.nomeFantasia} gravados com sucesso`,
-            DecoracaoMensagem.SUCESSO,
-            'Gravar Sistema'
+            "Gravar empresa",
+            DecoracaoMensagem.SUCESSO
           );
         },
         error: objetoErro => {
-          this.exibeMensagem.show(
+          this.exibirMensagem.showMessage(
             `${objetoErro.error.detail}`,
-            DecoracaoMensagem.ERRO,
-            'Erro de processamento'
+            "Erro no processamento",
+            DecoracaoMensagem.ERRO
           );
         }
       });
@@ -110,10 +137,10 @@ export class CadastroComponent implements OnInit {
     this.viaCepService.consultarCep(cep).subscribe({
       next: endereco => {
         if (endereco.erro) {
-          this.exibeMensagem.show(
+          this.exibirMensagem.showMessage(
             'CEP não encontrado ou incorreto',
-            DecoracaoMensagem.INFO,
             'Pesquisar CEP',
+            DecoracaoMensagem.INFO
           );
         }
         else {
@@ -124,10 +151,10 @@ export class CadastroComponent implements OnInit {
         }
       },
       error: () => {
-        this.exibeMensagem.show(
+        this.exibirMensagem.showMessage(
           'Não foi possível consultar o CEP',
+          'Erro de processamento',
           DecoracaoMensagem.ERRO,
-          'Erro de processamento'
         );
       }
     });

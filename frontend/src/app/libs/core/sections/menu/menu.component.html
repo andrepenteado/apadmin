@@ -1,0 +1,67 @@
+<!-- Sidebar -->
+<div class="collapse collapse-horizontal" id="collapseSidebar">
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-primary" style="width: 280px; min-height: 100vh;">
+    <a href="#" class="d-flex align-items-center justify-content-center p-3 text-decoration-none">
+      <img src="/assets/images/sem-usuario.png" alt="mdo" width="128" height="128" class="rounded-circle">
+    </a>
+    <div class="text-center fs-5 fw-bolder">{{  this.userLogin.nome }}</div>
+    <div class="text-center">{{ this.userLogin.perfilAtual }}</div>
+
+    <ul class="list-unstyled ps-0">
+      <li class="border-top my-3"></li>
+      <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+          data-bs-toggle="collapse" data-bs-target="#empresa-collapse" aria-expanded="false">
+          Empresas
+        </button>
+        <div class="collapse" id="empresa-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a routerLink="/empresa/pesquisar" class="text-bg-primary">Pesquisar</a></li>
+            <li><a routerLink="/empresa/cadastro" class="text-bg-primary d-inline-flex">Incluir</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+          data-bs-toggle="collapse" data-bs-target="#unidade-administrativa-collapse" aria-expanded="false">
+          Unidades Administrativas
+        </button>
+        <div class="collapse" id="unidade-administrativa-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a routerLink="/unidade-administrativa/pesquisar" class="text-bg-primary">Pesquisar</a></li>
+            <li><a routerLink="/unidade-administrativa/cadastro" class="text-bg-primary d-inline-flex">Incluir</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse" data-bs-target="#cargo-collapse" aria-expanded="false">
+          Cargos
+        </button>
+        <div class="collapse" id="cargo-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a routerLink="/cargo/pesquisar" class="text-bg-primary">Pesquisar</a></li>
+            <li><a routerLink="/cargo/cadastro" class="text-bg-primary d-inline-flex">Incluir</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse" data-bs-target="#colaborador-collapse" aria-expanded="false">
+          Colaboradores
+        </button>
+        <div class="collapse" id="colaborador-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a routerLink="/colaborador/pesquisar" class="text-bg-primary">Pesquisar</a></li>
+            <li><a routerLink="/colaborador/cadastro" class="text-bg-primary d-inline-flex">Incluir</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="border-top my-3"></li>
+      <p class="fw-bold ms-4">Versão 1.0.0</p>
+      <p class="fw-bold ms-4"><a href="javascript:" (click)="voltarAoPortal()" class="text-bg-primary">Voltar ao Portal</a></p>
+      <p class="fw-bold ms-4"><a href="javascript:" (click)="logout()" class="text-bg-primary">Sair</a></p>
+    </ul>
+  </div>
+</div>
+<!-- /#sidebar-wrapper -->

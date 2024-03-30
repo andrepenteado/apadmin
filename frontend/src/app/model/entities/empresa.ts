@@ -17,5 +17,6 @@ export class Empresa {
   bairro: string;
   cidade: string;
   estado: string;
+  matriz: Empresa;
 
 }

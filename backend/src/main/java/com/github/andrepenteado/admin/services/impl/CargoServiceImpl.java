@@ -1,6 +1,7 @@
 package com.github.andrepenteado.admin.services.impl;
 
 import com.github.andrepenteado.admin.model.entities.Cargo;
+import com.github.andrepenteado.admin.model.entities.Empresa;
 import com.github.andrepenteado.admin.model.repositories.CargoRepository;
 import com.github.andrepenteado.admin.services.CargoService;
 import com.github.andrepenteado.core.common.CoreUtil;
@@ -25,6 +26,11 @@ public class CargoServiceImpl implements CargoService {
     @Override
     public List<Cargo> listar() {
         return repository.findAllByOrderByNomeAsc();
+    }
+
+    @Override
+    public List<Cargo> listarPorEmpresa(Long idEmpresa) {
+        return repository.findByEmpresa_Id(idEmpresa);
     }
 
     @Override

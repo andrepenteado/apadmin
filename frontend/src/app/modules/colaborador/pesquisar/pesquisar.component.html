@@ -1,1 +1,42 @@
-<app-breadcrumb [title]="'Pesquisar Colaboradores'" [active_item]="'Colaboradores'"></app-breadcrumb>
+<core-widget-floating-button (click)="incluir()"><i class="bi bi-plus-lg fs-2"></i></core-widget-floating-button>
+
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/pagina-inicial"><i class="bi bi-house-door"></i></a></li>
+      <li class="breadcrumb-item active">Colaboradores</li>
+    </ol>
+  </nav>
+
+  <div class="card border border-primary rounded shadow-lg">
+    <div class="card-body custom-datatable table-responsive table-border-radius">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-styling table-striped align-middle">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">Cargo</th>
+          <th scope="col">Unidade Administrativa</th>
+          <th scope="col" class="text-center">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let colaborador of this.lista ">
+          <td>{{ colaborador.id }}</td>
+          <td>{{ colaborador.nome }}</td>
+          <td>{{ colaborador.telefone }}</td>
+          <td>{{ colaborador.cargo.nome }}</td>
+          <td>{{ colaborador.unidadeAdministrativa.empresa.nomeFantasia }} - {{ colaborador.unidadeAdministrativa.nome }}</td>
+          <td class="text-center">
+            <div class="btn-group">
+              <button class="btn btn-success btn-sm" (click)="editar(colaborador)"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-danger btn-sm" (click)="excluir(colaborador)"><i class="bi bi-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
