@@ -39,8 +39,8 @@
                 <div class="invalid-feedback">Razão social é um campo obrigatório</div>
               </div>
               <div class="form-group col-12 col-md-4">
-                <label>* Empresa</label>
-                <select [compareWith]="empresaService.compareFn" formControlName="matriz" class="form-select" required>
+                <label>Matriz</label>
+                <select [compareWith]="empresaService.compareFn" formControlName="matriz" class="form-select">
                   <option *ngFor="let empresa of listaEmpresas" [ngValue]="empresa">
                     {{ empresa.nomeFantasia }}
                   </option>
@@ -63,7 +63,7 @@
             <div class="row mb-3">
               <div class="form-group col-12 col-md-6">
                 <label>* Telefone</label>
-                <input type="text" name="telefone" formControlName="telefone" class="form-control" required="true" mask="(00) 00000-0000">
+                <input type="text" name="telefone" formControlName="telefone" class="form-control" required="true" mask="(00) 0000-0000">
                 <div class="invalid-feedback">Telefone é um campo obrigatório</div>
               </div>
               <div class="form-group col-12 col-md-6">

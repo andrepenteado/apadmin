@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
       <br><br>
       <h1><i class="bi bi-house-door" style="font-size: 10rem;"></i></h1>
       <h1>Página Inicial</h1>
-      <p class="lead">Você está conectado em <strong>Módulo Frontend Starter</strong></p>
+      <p class="lead">Você está conectado em <strong>Módulo Administrativo</strong></p>
     </div>
   `,
   styles: ``
