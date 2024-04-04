@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MENU } from "../../../../etc/menu";
 
 @Component({
   selector: 'core-section-toolbar',
@@ -11,4 +12,6 @@ export class ToolbarComponent {
     const body=document.body as HTMLElement;
     body.setAttribute('data-bs-theme', 'dark');
   }
+
+  protected readonly MENU = MENU;
 }

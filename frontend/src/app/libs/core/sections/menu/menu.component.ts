@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../../../services/auth.service";
 import { UserLogin } from "../../dtos/user-login";
+import { MENU } from "../../../../etc/menu";
 
 @Component({
   selector: 'core-section-menu',
@@ -27,4 +28,5 @@ export class MenuComponent implements OnInit {
     this.authService.voltarAoPortal();
   }
 
+  protected readonly MENU = MENU;
 }

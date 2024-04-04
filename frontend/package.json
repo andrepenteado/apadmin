@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.2.3",
-    "@angular/cli": "^17.2.3",
+    "@angular/cli": "^17.3.3",
     "@angular/compiler-cli": "^17.2.0",
     "@angular/localize": "^17.2.0",
     "@types/datatables.net": "^1.10.28",

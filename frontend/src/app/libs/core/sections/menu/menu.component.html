@@ -9,54 +9,17 @@
 
     <ul class="list-unstyled ps-0">
       <li class="border-top my-3"></li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-          data-bs-toggle="collapse" data-bs-target="#empresa-collapse" aria-expanded="false">
-          Empresas
+      <li class="mb-1" *ngFor="let menu of MENU">
+        <button class="btn btn-toggle d-inline-flex text-start align-items-center border-0 collapsed" data-bs-toggle="collapse" [attr.data-bs-target]="'#' + menu.id + '-collapse'" aria-expanded="false">
+          <i class="bi bi-{{ menu.icone }}"></i>&nbsp;{{ menu.texto }}
         </button>
-        <div class="collapse" id="empresa-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a routerLink="/empresa/pesquisar" class="text-bg-primary">Pesquisar</a></li>
-            <li><a routerLink="/empresa/cadastro" class="text-bg-primary d-inline-flex">Incluir</a></li>
+        <div class="collapse" id="{{ menu.id }}-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" *ngFor="let subMenu of menu.subMenus">
+            <li><a routerLink="{{ subMenu.path }}" class="text-bg-primary">{{ subMenu.texto }}</a></li>
           </ul>
         </div>
       </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-          data-bs-toggle="collapse" data-bs-target="#unidade-administrativa-collapse" aria-expanded="false">
-          Unidades Administrativas
-        </button>
-        <div class="collapse" id="unidade-administrativa-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a routerLink="/unidade-administrativa/pesquisar" class="text-bg-primary">Pesquisar</a></li>
-            <li><a routerLink="/unidade-administrativa/cadastro" class="text-bg-primary d-inline-flex">Incluir</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                data-bs-toggle="collapse" data-bs-target="#cargo-collapse" aria-expanded="false">
-          Cargos
-        </button>
-        <div class="collapse" id="cargo-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a routerLink="/cargo/pesquisar" class="text-bg-primary">Pesquisar</a></li>
-            <li><a routerLink="/cargo/cadastro" class="text-bg-primary d-inline-flex">Incluir</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                data-bs-toggle="collapse" data-bs-target="#colaborador-collapse" aria-expanded="false">
-          Colaboradores
-        </button>
-        <div class="collapse" id="colaborador-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a routerLink="/colaborador/pesquisar" class="text-bg-primary">Pesquisar</a></li>
-            <li><a routerLink="/colaborador/cadastro" class="text-bg-primary d-inline-flex">Incluir</a></li>
-          </ul>
-        </div>
-      </li>
+
       <li class="border-top my-3"></li>
       <p class="fw-bold ms-4">Versão 1.0.0</p>
       <p class="fw-bold ms-4"><a href="javascript:" (click)="voltarAoPortal()" class="text-bg-primary">Voltar ao Portal</a></p>
