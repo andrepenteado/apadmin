@@ -3,9 +3,10 @@ import { DataTableDirective } from "angular-datatables";
 import { DATATABLES_OPTIONS } from "../../../etc/datatables";
 import { Subject } from "rxjs";
 import { Router } from "@angular/router";
-import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/widgets/exibir-mensagem.service";
+import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/services/exibir-mensagem.service";
 import { UnidadeAdministrativaService } from "../../../services/unidade-administrativa.service";
 import { UnidadeAdministrativa } from "../../../model/entities/unidade-administrativa";
+import { ngxLoadingAnimationTypes } from "ngx-loading"
 
 @Component({
   selector: 'apadmin-unidade-administrativa-pesquisar',
@@ -21,6 +22,7 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject<any>();
 
   lista: UnidadeAdministrativa[] = [];
+  aguardar = true;
 
   constructor(
     private unidadeAdministrativaService: UnidadeAdministrativaService,
@@ -54,6 +56,7 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
           next: listaUnidadesAdministrativas => {
             this.lista = listaUnidadesAdministrativas;
             this.rerender();
+            this.aguardar = false;
           },
           error: objetoErro => {
             if (objetoErro.error.status == "403") {
@@ -93,4 +96,5 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
       );
   }
 
+  protected readonly ngxLoadingAnimationTypes = ngxLoadingAnimationTypes
 }

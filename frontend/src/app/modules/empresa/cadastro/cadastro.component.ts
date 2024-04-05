@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { EmpresaService } from "../../../services/empresa.service";
 import { Empresa } from "../../../model/entities/empresa";
-import { ViaCepService } from "../../../libs/core/widgets/via-cep.service";
+import { ViaCepService } from "../../../libs/core/services/via-cep.service";
 import { Observable } from "rxjs"
-import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/widgets/exibir-mensagem.service"
+import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/services/exibir-mensagem.service"
 
 @Component({
   selector: 'app-cadastro',
@@ -81,7 +81,6 @@ export class CadastroComponent implements OnInit {
     this.empresaService.buscar(id).subscribe(empresa => {
       this.empresa = empresa;
       this.form.patchValue(empresa);
-      console.log(empresa);
       this.form.get("matriz").setValue(empresa.matriz);
     });
   }

@@ -3,9 +3,10 @@ import { DataTableDirective } from "angular-datatables";
 import { DATATABLES_OPTIONS } from "../../../etc/datatables";
 import { Subject } from "rxjs";
 import { Router } from "@angular/router";
-import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/widgets/exibir-mensagem.service";
+import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/services/exibir-mensagem.service";
 import { Cargo } from "../../../model/entities/cargo";
 import { CargoService } from "../../../services/cargo.service";
+import { ngxLoadingAnimationTypes } from "ngx-loading"
 
 @Component({
   selector: 'apadmin-cargo-pesquisar',
@@ -21,6 +22,7 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject<any>();
 
   lista: Cargo[] = [];
+  aguardar = true;
 
   constructor(
     private cargoService: CargoService,
@@ -54,6 +56,7 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
           next: listaCargos => {
             this.lista = listaCargos;
             this.rerender();
+            this.aguardar = false;
           },
           error: objetoErro => {
             if (objetoErro.error.status == "403") {
@@ -93,4 +96,5 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
       );
   }
 
+  protected readonly ngxLoadingAnimationTypes = ngxLoadingAnimationTypes
 }

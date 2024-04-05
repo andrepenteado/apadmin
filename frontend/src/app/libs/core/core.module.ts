@@ -10,7 +10,11 @@ import { DecoratedComponent } from './layout/decorated/decorated.component';
 import { NoDecoratedComponent } from './layout/no-decorated/no-decorated.component';
 import { RouterModule } from '@angular/router';
 import { FloatingButtonComponent } from './widgets/floating-button.component';
-import { ToastNoAnimationModule } from "ngx-toastr"
+import { ToastNoAnimationModule } from "ngx-toastr";
+import { TapToTopComponent } from './widgets/tap-to-top.component';
+import { LoadingBarModule } from "@ngx-loading-bar/core"
+import { LoadingBarHttpClientModule } from "@ngx-loading-bar/http-client"
+import { LoadingBarRouterModule } from "@ngx-loading-bar/router"
 
 @NgModule({
   declarations: [
@@ -22,7 +26,8 @@ import { ToastNoAnimationModule } from "ngx-toastr"
     PaginaInicialComponent,
     ErroProcessamentoComponent,
     AcessoNegadoComponent,
-    FloatingButtonComponent
+    FloatingButtonComponent,
+    TapToTopComponent
   ],
   exports: [
     FloatingButtonComponent
@@ -30,7 +35,10 @@ import { ToastNoAnimationModule } from "ngx-toastr"
   imports: [
     CommonModule,
     RouterModule,
-    ToastNoAnimationModule.forRoot()
+    ToastNoAnimationModule.forRoot(),
+    LoadingBarHttpClientModule,
+    LoadingBarRouterModule,
+    LoadingBarModule
   ]
 })
 export class CoreModule { }

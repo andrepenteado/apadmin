@@ -6,8 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './decorated.component.css'
 })
 export class DecoratedComponent {
-  status: boolean = false;
-  clickEvent() {
-    this.status = !this.status;
-  }
+
 }

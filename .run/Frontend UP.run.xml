@@ -5,7 +5,7 @@
     <scripts>
       <script value="watch" />
     </scripts>
-    <node-interpreter value="$USER_HOME$/.asdf/shims/node" />
+    <node-interpreter value="node" />
     <envs />
     <method v="2" />
   </configuration>

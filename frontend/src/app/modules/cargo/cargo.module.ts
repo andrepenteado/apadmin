@@ -7,6 +7,7 @@ import { PesquisarComponent } from './pesquisar/pesquisar.component';
 import { CoreModule } from "../../libs/core/core.module";
 import { DataTablesModule } from "angular-datatables";
 import { ReactiveFormsModule } from "@angular/forms";
+import { NgxLoadingModule } from "ngx-loading"
 
 
 @NgModule({
@@ -14,12 +15,13 @@ import { ReactiveFormsModule } from "@angular/forms";
     CadastroComponent,
     PesquisarComponent
   ],
-  imports: [
-    CommonModule,
-    CargoRoutingModule,
-    CoreModule,
-    DataTablesModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        CargoRoutingModule,
+        CoreModule,
+        DataTablesModule,
+        ReactiveFormsModule,
+        NgxLoadingModule.forRoot({})
+    ]
 })
 export class CargoModule { }

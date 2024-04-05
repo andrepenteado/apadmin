@@ -11,19 +11,21 @@ import { SISTEMA_URL } from "../etc/routes"
 })
 export class AuthService {
 
+  readonly COOKIE_USUARIO = "apadminUsuarioLogado";
+
   constructor(
     private http: HttpClient,
     private router: Router
   ) { }
 
   public async usuarioLogado(): Promise<UserLogin> {
-    let userLogin = JSON.parse(sessionStorage.getItem("usuarioLogado") as string) as UserLogin;
+    let userLogin = JSON.parse(sessionStorage.getItem(this.COOKIE_USUARIO) as string) as UserLogin;
     if (userLogin == null) {
       const userLogin$ = this.http.get<UserLogin>(`${SISTEMA_URL.backendURL}${Api.AUTH}/usuario`);
       userLogin = await lastValueFrom(userLogin$);
       if (userLogin != null) {
         userLogin.perfilAtual = this.nomePerfil(userLogin);
-        sessionStorage.setItem("usuarioLogado", JSON.stringify(userLogin));
+        sessionStorage.setItem(this.COOKIE_USUARIO, JSON.stringify(userLogin));
       }
     }
     if (!this.isPermitido(userLogin))

@@ -9,6 +9,7 @@ import { DataTablesModule } from "angular-datatables";
 import { CoreModule } from "../../libs/core/core.module"
 import { NgbToast } from "@ng-bootstrap/ng-bootstrap"
 import { ReactiveFormsModule } from "@angular/forms"
+import { NgxLoadingModule } from "ngx-loading"
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from "@angular/forms"
     NgxMaskPipe,
     DataTablesModule,
     CoreModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxLoadingModule.forRoot({})
   ],
   providers: [provideNgxMask()]
 })
