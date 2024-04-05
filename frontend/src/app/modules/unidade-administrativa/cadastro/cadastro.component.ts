@@ -101,6 +101,13 @@ export class CadastroComponent implements OnInit {
         }
       });
     }
+    else {
+      this.exibirMensagem.showMessage(
+        "Preencha todos os dados obrigatórios antes de gravar os dados",
+        "Dados obrigatórios",
+        DecoracaoMensagem.ATENCAO
+      );
+    }
   }
 
   protected readonly last = last;
