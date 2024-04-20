@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MENU } from "../../../../etc/menu";
+import { Layout } from "../../../../etc/layout"
 
 @Component({
   selector: 'core-section-toolbar',
@@ -13,5 +14,12 @@ export class ToolbarComponent {
     body.setAttribute('data-bs-theme', 'dark');
   }
 
-  protected readonly MENU = MENU;
+  getMenu() {
+    return MENU
+  }
+
+  getLayout() {
+    return Layout;
+  }
+
 }

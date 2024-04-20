@@ -4,10 +4,10 @@ CREATE USER "apadmin-dbuser" WITH SUPERUSER ENCRYPTED PASSWORD 'apadmin-dbpasswd
 \c "apsso-dbname";
 
 INSERT INTO oauth2_registered_client (
-    id, client_name, data_cadastro, url_entrada, client_id, client_id_issued_at, client_secret, client_secret_expires_at, client_authentication_methods,
+    id, client_name, data_cadastro, usuario_cadastro, url_entrada, client_id, client_id_issued_at, client_secret, client_secret_expires_at, client_authentication_methods,
     authorization_grant_types, redirect_uris, post_logout_redirect_uris, scopes, client_settings, token_settings)
 VALUES (
-   'Admin', 'Sistema de administração de empresas e colaboradores', now(), 'https://admin.apcode.com.br', 'com.github.andrepenteado.admin', '2023-01-01 00:00:00.000000',
+   'Admin', 'Sistema de administração de empresas e colaboradores', now(), 'Arquiteto do Sistema', 'https://admin.apcode.com.br', 'com.github.andrepenteado.admin', '2023-01-01 00:00:00.000000',
    '{bcrypt}$2a$12$RDbOnTY4oudD2eONOXmrwuOPZQ6NX.iArpcqVazlBLujH90ONmvse', null, 'client_secret_basic',  'refresh_token,client_credentials,authorization_code',
    'https://admin.apcode.com.br/authorized,https://admin.apcode.com.br/login/oauth2/code/admin-oidc,http://dev.admin.apcode.com.br:30003/authorized,http://dev.admin.apcode.com.br:30003/login/oauth2/code/admin-oidc,http://localhost:30003/authorized,http://localhost:30003/login/oauth2/code/admin-oidc',
    'https://admin.apcode.com.br/logout,http://dev.admin.apcode.com.br:30003/logout,http://localhost:30003/logout', 'openid',
@@ -18,4 +18,4 @@ VALUES (
 INSERT INTO perfil_sistema (authority, id_oauth2_registered_client, descricao)
 VALUES ('ROLE_Admin_Administrador', 'Admin', 'Administrador');
 
-INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_Admin_Administrador');
+INSERT INTO authorities (username, authority) VALUES ('arquiteto', 'ROLE_Admin_Administrador');
