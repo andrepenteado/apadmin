@@ -3,9 +3,8 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { EmpresaService } from "../../../services/empresa.service";
 import { Empresa } from "../../../model/entities/empresa";
-import { ViaCepService } from "../../../libs/core/services/via-cep.service";
 import { Observable } from "rxjs"
-import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/services/exibir-mensagem.service"
+import { DecoracaoMensagem, ExibirMensagemService, ViaCepService } from "@andrepenteado/ngx-apcore"
 
 @Component({
   selector: 'app-cadastro',

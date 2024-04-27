@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UnidadeAdministrativa } from "../../../model/entities/unidade-administrativa";
 import { ActivatedRoute } from "@angular/router";
-import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/services/exibir-mensagem.service";
 import { last, Observable } from "rxjs";
 import { UnidadeAdministrativaService } from "../../../services/unidade-administrativa.service";
 import { TipoUnidadeAdministrativa } from "../../../model/enums/tipo-unidade-administrativa";
 import { Empresa } from "../../../model/entities/empresa";
 import { EmpresaService } from "../../../services/empresa.service";
+import { DecoracaoMensagem, ExibirMensagemService } from "@andrepenteado/ngx-apcore"
 
 @Component({
   selector: 'apadmin-unidade-administrativa-cadastro',

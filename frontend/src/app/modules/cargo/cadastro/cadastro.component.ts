@@ -3,10 +3,10 @@ import { Empresa } from "../../../model/entities/empresa";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { EmpresaService } from "../../../services/empresa.service";
-import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/services/exibir-mensagem.service";
 import { Observable } from "rxjs";
 import { Cargo } from "../../../model/entities/cargo";
 import { CargoService } from "../../../services/cargo.service";
+import { DecoracaoMensagem, ExibirMensagemService } from "@andrepenteado/ngx-apcore"
 
 @Component({
   selector: 'apadmin-cargo-cadastro',

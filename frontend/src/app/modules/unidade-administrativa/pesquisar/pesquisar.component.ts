@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DataTableDirective } from "angular-datatables";
-import { DATATABLES_OPTIONS } from "../../../etc/datatables";
 import { Subject } from "rxjs";
 import { Router } from "@angular/router";
-import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/services/exibir-mensagem.service";
 import { UnidadeAdministrativaService } from "../../../services/unidade-administrativa.service";
 import { UnidadeAdministrativa } from "../../../model/entities/unidade-administrativa";
 import { ngxLoadingAnimationTypes } from "ngx-loading"
+import { DATATABLES_OPTIONS, DecoracaoMensagem, ExibirMensagemService } from "@andrepenteado/ngx-apcore"
 
 @Component({
   selector: 'apadmin-unidade-administrativa-pesquisar',

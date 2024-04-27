@@ -3,8 +3,6 @@ import { Colaborador } from "../../../model/entities/colaborador";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { EmpresaService } from "../../../services/empresa.service";
-import { ViaCepService } from "../../../libs/core/services/via-cep.service";
-import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/services/exibir-mensagem.service";
 import { Observable } from "rxjs";
 import { Empresa } from "../../../model/entities/empresa";
 import { ColaboradorService } from "../../../services/colaborador.service";
@@ -12,6 +10,7 @@ import { UnidadeAdministrativa } from "../../../model/entities/unidade-administr
 import { Cargo } from "../../../model/entities/cargo";
 import { UnidadeAdministrativaService } from "../../../services/unidade-administrativa.service";
 import { CargoService } from "../../../services/cargo.service";
+import { DecoracaoMensagem, ExibirMensagemService, ViaCepService } from "@andrepenteado/ngx-apcore"
 
 @Component({
   selector: 'apadmin-colaborador-cadastro',

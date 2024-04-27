@@ -4,7 +4,6 @@ import { Observable } from "rxjs";
 import { Cargo } from "../model/entities/cargo";
 import { SISTEMA_URL } from "../etc/routes"
 import { Api } from "../etc/api"
-import { Empresa } from "../model/entities/empresa";
 
 @Injectable({
   providedIn: 'root'

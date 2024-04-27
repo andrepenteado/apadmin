@@ -4,7 +4,6 @@ import { Observable } from "rxjs";
 import { UnidadeAdministrativa } from "../model/entities/unidade-administrativa";
 import { SISTEMA_URL } from "../etc/routes"
 import { Api } from "../etc/api"
-import { Empresa } from "../model/entities/empresa";
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +38,7 @@ export class UnidadeAdministrativaService {
     return this.http.delete(`${SISTEMA_URL.backendURL}${Api.UNIDADES_ADMINISTRATIVAS}/${id}`);
   }
 
-  public compareFn(ua1: Empresa, ua2: Empresa): boolean {
+  public compareFn(ua1: UnidadeAdministrativa, ua2: UnidadeAdministrativa): boolean {
     return ua1 && ua2 ? ua1.id === ua2.id : ua1 === ua2;
   }
 

@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { CargoRoutingModule } from './cargo-routing.module';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { PesquisarComponent } from './pesquisar/pesquisar.component';
-import { CoreModule } from "../../libs/core/core.module";
 import { DataTablesModule } from "angular-datatables";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgxLoadingModule } from "ngx-loading"
+import { NgxApcoreModule } from "@andrepenteado/ngx-apcore"
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import { NgxLoadingModule } from "ngx-loading"
     imports: [
         CommonModule,
         CargoRoutingModule,
-        CoreModule,
+        NgxApcoreModule,
         DataTablesModule,
         ReactiveFormsModule,
         NgxLoadingModule.forRoot({})
