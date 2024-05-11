@@ -7,11 +7,14 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+
+import static com.github.andrepenteado.admin.AdminApplication.PERFIL_ADMINISTRADOR;
 
 @RestController
 @RequestMapping("/colaboradores")
@@ -23,6 +26,7 @@ public class ColaboradorResource {
     private final ColaboradorService service;
 
     @GetMapping
+    @Secured({ PERFIL_ADMINISTRADOR })
     public List<Colaborador> listar() {
         log.info("Listar todos colaboradores");
         try {
@@ -35,6 +39,7 @@ public class ColaboradorResource {
     }
 
     @GetMapping("/{id}")
+    @Secured({ PERFIL_ADMINISTRADOR })
     public Colaborador buscar(@PathVariable Long id) {
         log.info("Buscar colaborador por ID #{}", id);
         try {
@@ -51,6 +56,7 @@ public class ColaboradorResource {
     }
 
     @PostMapping
+    @Secured({ PERFIL_ADMINISTRADOR })
     public Colaborador incluir(@Valid @RequestBody Colaborador colaborador, BindingResult validacao) {
         log.info("Incluir novo colaborador {}", colaborador);
         try {
@@ -66,6 +72,7 @@ public class ColaboradorResource {
     }
 
     @PutMapping("/{id}")
+    @Secured({ PERFIL_ADMINISTRADOR })
     public Colaborador alterar(@PathVariable Long id, @Valid @RequestBody Colaborador colaborador, BindingResult validacao) {
         log.info("Alterar colaborador {}", colaborador);
         try {
@@ -81,6 +88,7 @@ public class ColaboradorResource {
     }
 
     @DeleteMapping("/{id}")
+    @Secured({ PERFIL_ADMINISTRADOR })
     public void excluir(@PathVariable Long id) {
         log.info("Excluir colaborador ID #{}", id);
         try {

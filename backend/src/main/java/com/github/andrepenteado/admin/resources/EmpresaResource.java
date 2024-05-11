@@ -7,11 +7,14 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+
+import static com.github.andrepenteado.admin.AdminApplication.PERFIL_ADMINISTRADOR;
 
 @RestController
 @RequestMapping("/empresas")
@@ -23,6 +26,7 @@ public class EmpresaResource {
     private final EmpresaService service;
 
     @GetMapping
+    @Secured({ PERFIL_ADMINISTRADOR })
     public List<Empresa> listar() {
         log.info("Listar todas empresas");
         try {
@@ -35,6 +39,7 @@ public class EmpresaResource {
     }
 
     @GetMapping("/{id}")
+    @Secured({ PERFIL_ADMINISTRADOR })
     public Empresa buscar(@PathVariable Long id) {
         log.info("Buscar empresa por ID #{}", id);
         try {
@@ -51,6 +56,7 @@ public class EmpresaResource {
     }
 
     @PostMapping
+    @Secured({ PERFIL_ADMINISTRADOR })
     public Empresa incluir(@Valid @RequestBody Empresa empresa, BindingResult validacao) {
         log.info("Incluir nova empresa {}", empresa);
         try {
@@ -66,6 +72,7 @@ public class EmpresaResource {
     }
 
     @PutMapping("/{id}")
+    @Secured({ PERFIL_ADMINISTRADOR })
     public Empresa alterar(@PathVariable Long id, @Valid @RequestBody Empresa empresa, BindingResult validacao) {
         log.info("Alterar empresa {}", empresa);
         try {
@@ -81,6 +88,7 @@ public class EmpresaResource {
     }
 
     @DeleteMapping("/{id}")
+    @Secured({ PERFIL_ADMINISTRADOR })
     public void excluir(@PathVariable Long id) {
         log.info("Excluir empresa ID #{}", id);
         try {

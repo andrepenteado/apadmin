@@ -85,13 +85,6 @@ export class CadastroComponent implements OnInit {
             "Gravar cargo",
             DecoracaoMensagem.SUCESSO
           );
-        },
-        error: objetoErro => {
-          this.exibirMensagem.showMessage(
-            `${objetoErro.error.detail}`,
-            "Erro no processamento",
-            DecoracaoMensagem.ERRO
-          );
         }
       });
     }

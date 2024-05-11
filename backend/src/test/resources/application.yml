@@ -1,7 +1,7 @@
 spring:
 
   datasource:
-    url: jdbc:postgresql://dev.db-test.apcode.com.br:5433/apadmin-dbname?autoReconnect=true
+    url: jdbc:postgresql://dbserver:5433/apadmin-dbname?autoReconnect=true
     username: apadmin-dbuser
     password: apadmin-dbpasswd
     driver-class-name: org.postgresql.Driver

@@ -1,9 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DECORATED_ROUTES, NO_DECORATED_ROUTES } from './etc/routes';
-import { DecoratedComponent, NoDecoratedComponent } from "@andrepenteado/ngx-apcore"
+import {
+  AuthorizedComponent,
+  DecoratedComponent,
+  LoginComponent,
+  NoDecoratedComponent
+} from "@andrepenteado/ngx-apcore"
 
 const routes: Routes = [
+
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+  { path: 'login', component: LoginComponent },
+
+  { path: 'authorized', component: AuthorizedComponent },
+
   {
     path: '',
     component: DecoratedComponent,
@@ -14,6 +26,7 @@ const routes: Routes = [
     component: NoDecoratedComponent,
     children: NO_DECORATED_ROUTES
   }
+
 ];
 
 @NgModule({

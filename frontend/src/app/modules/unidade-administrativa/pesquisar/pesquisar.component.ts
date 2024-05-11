@@ -56,14 +56,6 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
             this.lista = listaUnidadesAdministrativas;
             this.rerender();
             this.aguardar = false;
-          },
-          error: objetoErro => {
-            if (objetoErro.error.status == "403") {
-              this.router.navigate(["/acesso-negado"]);
-            }
-            else {
-              this.exibirMensagem.showMessage(`${objetoErro.error.detail}`, "Erro de processamento", DecoracaoMensagem.ERRO);
-            }
           }
         }
       );
@@ -85,9 +77,6 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
             this.unidadeAdministrativaService.excluir(unidadeAdministrativa.id).subscribe({
               next: () => {
                 this.pesquisar()
-              },
-              error: objetoErro => {
-                this.exibirMensagem.showMessage(`${objetoErro.error.detail}`, "Erro de processamento", DecoracaoMensagem.ERRO);
               }
             });
           }

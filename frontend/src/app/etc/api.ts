@@ -1,11 +1,7 @@
-export class Api {
+export const API_EMPRESAS: string = '/empresas';
 
-  static readonly EMPRESAS: string = '/empresas';
+export const API_UNIDADES_ADMINISTRATIVAS: string = '/unidades-administrativas';
 
-  static readonly UNIDADES_ADMINISTRATIVAS: string = '/unidades-administrativas';
+export const API_COLABORADORES: string = '/colaboradores';
 
-  static readonly COLABORADORES: string = '/colaboradores';
-
-  static readonly CARGOS: string = '/cargos';
-
-}
+export const API_CARGOS: string = '/cargos';

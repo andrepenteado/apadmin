@@ -5,7 +5,10 @@ export const DECORATED_ROUTES: Routes = [
 
   { path: "", component: PaginaInicialComponent },
 
-  { path: "pagina-inicial", component: PaginaInicialComponent },
+  {
+    path: "pagina-inicial",
+    component: PaginaInicialComponent
+  },
 
   {
     path: "empresa",
@@ -33,11 +36,3 @@ export const NO_DECORATED_ROUTES: Routes = [
   { path: "acesso-negado", component: AcessoNegadoComponent }
 
 ]
-
-export const SISTEMA_URL = {
-
-  backendURL:  window.location.protocol + '//' + window.location.host,
-
-  portalURL: window.location.protocol + '//' + window.location.host.replace('admin.', 'portal.').replace('30003','30002')
-
-};

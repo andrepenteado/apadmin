@@ -58,14 +58,6 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
           this.lista = listaEmpresas;
           this.rerender();
           this.aguardar = false;
-        },
-        error: objetoErro => {
-          if (objetoErro.error.status == "403") {
-            this.router.navigate(["/acesso-negado"]);
-          }
-          else {
-            this.exibirMensagem.showMessage(`${objetoErro.error.detail}`, "Erro de processamento", DecoracaoMensagem.ERRO);
-          }
         }
       }
     );
@@ -87,9 +79,6 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
           this.empresaService.excluir(empresa.id).subscribe({
             next: () => {
               this.pesquisar()
-            },
-            error: objetoErro => {
-              this.exibirMensagem.showMessage(`${objetoErro.error.detail}`, "Erro de processamento", DecoracaoMensagem.ERRO);
             }
           });
         }

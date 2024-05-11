@@ -1,11 +1,11 @@
 {
-  "name": "apadmin",
+  "name": "admin",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "watch": "ng build --watch --configuration localhost",
     "test": "ng test"
   },
   "private": true,
