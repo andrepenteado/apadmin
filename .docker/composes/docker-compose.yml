@@ -1,0 +1,56 @@
+services:
+
+  dbserver:
+    image: postgres:16
+    container_name: apsso-db
+    hostname: apsso-db
+    environment:
+      POSTGRES_USER: apsso-dbuser
+      POSTGRES_PASSWORD: apsso-dbpasswd
+      POSTGRES_DB: apsso-dbname
+    volumes:
+      - apadmin-pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - docker-host-network
+
+  dbserver-test:
+    image: postgres:16
+    container_name: apsso-db-test
+    hostname: apsso-db-test
+    environment:
+      POSTGRES_USER: apsso-dbuser
+      POSTGRES_PASSWORD: apsso-dbpasswd
+      POSTGRES_DB: apsso-dbname
+    volumes:
+      - apadmin-test-pgdata:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    networks:
+      - docker-host-network
+
+  admin-backend:
+    image: ghcr.io/andrepenteado/apadmin-backend
+    container_name: admin-backend
+    hostname: admin-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      AUTHORIZATION_SERVER_URL: http://login:30000
+    ports:
+      - 30003:8080
+    networks:
+      - docker-host-network
+
+  admin-frontend:
+    image: ghcr.io/andrepenteado/apadmin-frontend
+    container_name: admin-frontend
+    hostname: admin-frontend
+    ports:
+      - 40003:80
+    networks:
+      - docker-host-network
+
+networks:
+  docker-host-network:
+    external: true
