@@ -14,7 +14,7 @@ import { DATATABLES_OPTIONS, DecoracaoMensagem, ExibirMensagemService } from "@a
 })
 export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
 
-  @ViewChild(DataTableDirective, {static: false})
+  @ViewChild(DataTableDirective, { static: false })
   dtElement: DataTableDirective;
 
   dtOptions: DataTables.Settings = DATATABLES_OPTIONS;
@@ -52,12 +52,12 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
     this.colaboradorService
       .listar()
       .subscribe({
-          next: listaColaboradores => {
-            this.lista = listaColaboradores;
-            this.rerender();
-            this.aguardar = false;
-          }
+        next: listaColaboradores => {
+          this.lista = listaColaboradores;
+          this.rerender();
+          this.aguardar = false;
         }
+      }
       );
   }
 
@@ -73,14 +73,14 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
     this.exibirMensagem
       .showConfirm(`Confirma a exclusão do colaborador ${colaborador.nome}`, "Excluir?")
       .then((resposta) => {
-          if (resposta.value) {
-            this.colaboradorService.excluir(colaborador.id).subscribe({
-              next: () => {
-                this.pesquisar()
-              }
-            });
-          }
+        if (resposta.value) {
+          this.colaboradorService.excluir(colaborador.id).subscribe({
+            next: () => {
+              this.pesquisar()
+            }
+          });
         }
+      }
       );
   }
 

@@ -6,7 +6,7 @@
     <contextName>APadmin</contextName>
 
     <property name="APP" value="apadmin" />
-    <property name="MODULE" value="apadmin" />
+    <property name="MODULE" value="admin" />
 
     <include resource="logback-common.xml"/>
 
