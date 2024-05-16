@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
+import { environment } from "../../environments/environment";
+import { API_UNIDADES_ADMINISTRATIVAS } from "../etc/api";
 import { UnidadeAdministrativa } from "../model/entities/unidade-administrativa";
-import { Empresa } from "../model/entities/empresa";
-import { environment } from "../../environments/environment"
-import { API_UNIDADES_ADMINISTRATIVAS } from "../etc/api"
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +38,7 @@ export class UnidadeAdministrativaService {
     return this.http.delete(`${environment.backendURL}${API_UNIDADES_ADMINISTRATIVAS}/${id}`);
   }
 
-  public compareFn(ua1: Empresa, ua2: Empresa): boolean {
+  public compareFn(ua1: UnidadeAdministrativa, ua2: UnidadeAdministrativa): boolean {
     return ua1 && ua2 ? ua1.id === ua2.id : ua1 === ua2;
   }
 

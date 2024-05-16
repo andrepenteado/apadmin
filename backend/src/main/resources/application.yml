@@ -20,6 +20,7 @@ spring:
         enable_lazy_load_no_trans: true
         temp:
           use_jdbc_metadata_defaults: false
+
 server:
   forward-headers-strategy: framework
   error:

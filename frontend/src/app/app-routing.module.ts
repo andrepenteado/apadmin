@@ -21,6 +21,7 @@ const routes: Routes = [
     component: NoDecoratedComponent,
     children: NO_DECORATED_ROUTES
   }
+
 ];
 
 @NgModule({

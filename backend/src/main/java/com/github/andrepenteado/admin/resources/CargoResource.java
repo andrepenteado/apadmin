@@ -1,9 +1,7 @@
 package com.github.andrepenteado.admin.resources;
 
 import com.github.andrepenteado.admin.model.entities.Cargo;
-import com.github.andrepenteado.admin.model.entities.Empresa;
 import com.github.andrepenteado.admin.services.CargoService;
-import com.github.andrepenteado.admin.services.EmpresaService;
 import io.micrometer.observation.annotation.Observed;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +24,6 @@ import static com.github.andrepenteado.admin.AdminApplication.PERFIL_ADMINISTRAD
 public class CargoResource {
 
     private final CargoService service;
-
-    private final EmpresaService empresaService;
 
     @GetMapping
     @Secured({ PERFIL_ADMINISTRADOR })

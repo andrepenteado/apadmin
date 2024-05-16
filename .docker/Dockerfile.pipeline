@@ -1,5 +1,0 @@
-FROM amazoncorretto:21
-WORKDIR /apadmin
-COPY backend/target/apadmin.jar /apadmin/apadmin.jar
-ENTRYPOINT [ "java", "-jar", "/apadmin/apadmin.jar" ]
-EXPOSE 8080

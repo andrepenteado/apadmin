@@ -4,8 +4,8 @@ import { UnidadeAdministrativaRoutingModule } from './unidade-administrativa-rou
 import { PesquisarComponent } from './pesquisar/pesquisar.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { ReactiveFormsModule } from "@angular/forms";
-import { NgxApcoreModule } from "@andrepenteado/ngx-apcore"
 import { NgxLoadingModule } from "ngx-loading"
+import { NgxApcoreModule } from "@andrepenteado/ngx-apcore"
 
 @NgModule({
   declarations: [
