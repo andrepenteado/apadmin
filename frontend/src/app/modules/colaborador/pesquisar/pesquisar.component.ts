@@ -1,25 +1,16 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { DataTableDirective } from "angular-datatables";
-import { DATATABLES_OPTIONS } from "../../../etc/datatables";
-import { Subject } from "rxjs";
+import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/services/exibir-mensagem.service";
 import { Colaborador } from "../../../model/entities/colaborador";
 import { ColaboradorService } from "../../../services/colaborador.service";
 import { ngxLoadingAnimationTypes } from "ngx-loading"
+import { DatatablesService, ExibirMensagemService } from "@andrepenteado/ngx-apcore"
 
 @Component({
-  selector: 'apadmin-colaborador-pesquisar',
+  selector: 'admin-colaborador-pesquisar',
   templateUrl: './pesquisar.component.html',
   styles: ``
 })
-export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
-
-  @ViewChild(DataTableDirective, {static: false})
-  dtElement: DataTableDirective;
-
-  dtOptions: DataTables.Settings = DATATABLES_OPTIONS;
-  dtTrigger: Subject<any> = new Subject<any>();
+export class PesquisarComponent implements OnInit {
 
   lista: Colaborador[] = [];
   aguardar = true;
@@ -27,26 +18,12 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
   constructor(
     private colaboradorService: ColaboradorService,
     private router: Router,
-    private exibirMensagem: ExibirMensagemService
+    private exibirMensagem: ExibirMensagemService,
+    private datatablesService: DatatablesService
   ) { }
-
-  ngAfterViewInit(): void {
-    this.dtTrigger.next(null);
-  }
 
   ngOnInit(): void {
     this.pesquisar();
-  }
-
-  ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
-  }
-
-  rerender(): void {
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      dtInstance.destroy();
-      this.dtTrigger.next(null);
-    });
   }
 
   pesquisar(): void {
@@ -55,16 +32,10 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
       .subscribe({
           next: listaColaboradores => {
             this.lista = listaColaboradores;
-            this.rerender();
             this.aguardar = false;
-          },
-          error: objetoErro => {
-            if (objetoErro.error.status == "403") {
-              this.router.navigate(["/acesso-negado"]);
-            }
-            else {
-              this.exibirMensagem.showMessage(`${objetoErro.error.detail}`, "Erro de processamento", DecoracaoMensagem.ERRO);
-            }
+            setTimeout(() => {
+              $('#datatable-pesquisar-colaboradores').DataTable(this.datatablesService.getOptions());
+            }, 5);
           }
         }
       );
@@ -85,10 +56,7 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
           if (resposta.value) {
             this.colaboradorService.excluir(colaborador.id).subscribe({
               next: () => {
-                this.pesquisar()
-              },
-              error: objetoErro => {
-                this.exibirMensagem.showMessage(`${objetoErro.error.detail}`, "Erro de processamento", DecoracaoMensagem.ERRO);
+                window.location.reload();
               }
             });
           }

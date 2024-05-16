@@ -1,4 +1,4 @@
-<core-widget-floating-button (click)="incluir()"><i class="bi bi-plus-lg fs-2"></i></core-widget-floating-button>
+<apcore-widget-floating-button (click)="incluir()"><i class="bi bi-plus-lg fs-2"></i></apcore-widget-floating-button>
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb" style="margin-top: -23px">
@@ -14,30 +14,30 @@
     <ngx-loading [show]="aguardar" [config]="{ primaryColour: '#dd0031', secondaryColour: '#fff', animationType: ngxLoadingAnimationTypes.doubleBounce }"></ngx-loading>
 
     <div class="card-body custom-datatable table-responsive table-border-radius">
-      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-styling table-striped align-middle">
+      <table id="datatable-pesquisar-empresas" class="table table-styling table-striped align-middle nowrap w-100">
         <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Razão Social</th>
-          <th scope="col">Nome Fantasia</th>
-          <th scope="col">Cidade</th>
-          <th scope="col">Telefone</th>
           <th scope="col" class="text-center">Ações</th>
+          <th scope="col" class="text-center">#</th>
+          <th scope="col" class="text-start">Razão Social</th>
+          <th scope="col" class="text-center">Nome Fantasia</th>
+          <th scope="col" class="text-center">Cidade</th>
+          <th scope="col" class="text-center">Telefone</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let empresa of this.lista">
-          <td>{{ empresa.id }}</td>
-          <td>{{ empresa.razaoSocial }}</td>
-          <td>{{ empresa.nomeFantasia }}</td>
-          <td>{{ empresa.cidade }}</td>
-          <td>{{ empresa.telefone }}</td>
           <td class="text-center">
             <div class="btn-group">
               <button class="btn btn-success btn-sm" (click)="editar(empresa)"><i class="bi bi-pencil"></i></button>
               <button class="btn btn-danger btn-sm" (click)="excluir(empresa)"><i class="bi bi-trash"></i></button>
             </div>
           </td>
+          <td class="text-center">{{ empresa.id }}</td>
+          <td class="text-start">{{ empresa.razaoSocial }}</td>
+          <td class="text-center">{{ empresa.nomeFantasia }}</td>
+          <td class="text-center">{{ empresa.cidade }}</td>
+          <td class="text-center">{{ empresa.telefone }}</td>
         </tr>
         </tbody>
       </table>

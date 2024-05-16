@@ -4,7 +4,9 @@ import com.github.andrepenteado.admin.model.entities.Colaborador;
 import com.github.andrepenteado.admin.model.repositories.ColaboradorRepository;
 import com.github.andrepenteado.admin.services.ColaboradorService;
 import com.github.andrepenteado.core.common.CoreUtil;
+import com.github.andrepenteado.core.web.dto.UserLogin;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -35,19 +37,19 @@ public class ColaboradorServiceImpl implements ColaboradorService {
     }
 
     @Override
-    public Colaborador incluir(Colaborador colaborador, BindingResult validacao) {
+    public Colaborador incluir(Colaborador colaborador, UserLogin userLogin, BindingResult validacao) {
         String erros = CoreUtil.validateModel(validacao);
         if (erros != null)
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, erros);
         if (Objects.nonNull(repository.findByCpf(colaborador.getCpf())))
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, String.format("CPF %n já se encontra cadastrado", colaborador.getCpf()));
         colaborador.setDataCadastro(LocalDateTime.now());
-        colaborador.setUsuarioCadastro(SecurityContextHolder.getContext().getAuthentication().getName());
+        colaborador.setUsuarioCadastro(userLogin.getNome());
         return repository.save(colaborador);
     }
 
     @Override
-    public Colaborador alterar(Colaborador colaborador, Long id, BindingResult validacao) {
+    public Colaborador alterar(Colaborador colaborador, Long id, UserLogin userLogin, BindingResult validacao) {
         String erros = CoreUtil.validateModel(validacao);
         if (erros != null)
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, erros);
@@ -57,7 +59,7 @@ public class ColaboradorServiceImpl implements ColaboradorService {
         if (!Objects.equals(colaboradorAlterar.getId(), id))
             throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("Solicitado alterar colaborador #ID %n, porém enviado dados do colaborador #%n", id, colaboradorAlterar.getId()));
         colaborador.setDataUltimaAtualizacao(LocalDateTime.now());
-        colaborador.setUsuarioUltimaAtualizacao(SecurityContextHolder.getContext().getAuthentication().getName());
+        colaborador.setUsuarioUltimaAtualizacao(userLogin.getNome());
         return repository.save(colaborador);
     }
 

@@ -1,0 +1,30 @@
+services:
+
+  backend:
+    image: ghcr.io/andrepenteado/apadmin/backend
+    container_name: apadmin-backend
+    hostname: apadmin-backend
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 5s
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - 30003:8080
+    networks:
+      - docker-host-network
+
+  frontend:
+    image: ghcr.io/andrepenteado/apadmin/frontend
+    container_name: apadmin-frontend
+    hostname: apadmin-frontend
+    ports:
+      - 40003:80
+    networks:
+      - docker-host-network
+
+networks:
+  docker-host-network:
+    external: true

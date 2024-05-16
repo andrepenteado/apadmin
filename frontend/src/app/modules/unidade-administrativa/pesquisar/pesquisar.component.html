@@ -1,4 +1,4 @@
-<core-widget-floating-button (click)="incluir()"><i class="bi bi-plus-lg fs-2"></i></core-widget-floating-button>
+<apcore-widget-floating-button (click)="incluir()"><i class="bi bi-plus-lg fs-2"></i></apcore-widget-floating-button>
 
 <nav aria-label="breadcrumb" style="margin-top: -23px">
   <ol class="breadcrumb">
@@ -14,28 +14,28 @@
     <ngx-loading [show]="aguardar" [config]="{ primaryColour: '#dd0031', secondaryColour: '#fff', animationType: ngxLoadingAnimationTypes.doubleBounce }"></ngx-loading>
 
     <div class="card-body custom-datatable table-responsive table-border-radius">
-      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-styling table-striped align-middle">
+      <table id="datatable-pesquisar-unidades-administrativas" class="table table-styling table-striped align-middle nowrap w-100">
         <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Tipo</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Empresa</th>
           <th scope="col" class="text-center">Ações</th>
+          <th scope="col" class="text-center">#</th>
+          <th scope="col" class="text-center">Tipo</th>
+          <th scope="col" class="text-start">Nome</th>
+          <th scope="col" class="text-center">Empresa</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let unidadeAdministrativa of this.lista ">
-          <td>{{ unidadeAdministrativa.id }}</td>
-          <td>{{ unidadeAdministrativa.tipo }}</td>
-          <td>{{ unidadeAdministrativa.nome }}</td>
-          <td>{{ unidadeAdministrativa.empresa.nomeFantasia }}</td>
           <td class="text-center">
             <div class="btn-group">
               <button class="btn btn-success btn-sm" (click)="editar(unidadeAdministrativa)"><i class="bi bi-pencil"></i></button>
               <button class="btn btn-danger btn-sm" (click)="excluir(unidadeAdministrativa)"><i class="bi bi-trash"></i></button>
             </div>
           </td>
+          <td class="text-center">{{ unidadeAdministrativa.id }}</td>
+          <td class="text-center">{{ unidadeAdministrativa.tipo }}</td>
+          <td class="text-start">{{ unidadeAdministrativa.nome }}</td>
+          <td class="text-center">{{ unidadeAdministrativa.empresa.nomeFantasia }}</td>
         </tr>
         </tbody>
       </table>

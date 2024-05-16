@@ -4,6 +4,7 @@ import com.github.andrepenteado.admin.model.entities.Empresa;
 import com.github.andrepenteado.admin.model.repositories.EmpresaRepository;
 import com.github.andrepenteado.admin.services.EmpresaService;
 import com.github.andrepenteado.core.common.CoreUtil;
+import com.github.andrepenteado.core.web.dto.UserLogin;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -36,19 +37,19 @@ public class EmpresaServiceImpl implements EmpresaService {
     }
 
     @Override
-    public Empresa incluir(Empresa empresa, BindingResult validacao) {
+    public Empresa incluir(Empresa empresa, UserLogin userLogin, BindingResult validacao) {
         String erros = CoreUtil.validateModel(validacao);
         if (erros != null)
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, erros);
         if (Objects.nonNull(repository.findByCnpj(empresa.getCnpj())))
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, String.format("CNPJ %n já se encontra cadastrado", empresa.getCnpj()));
         empresa.setDataCadastro(LocalDateTime.now());
-        empresa.setUsuarioCadastro(SecurityContextHolder.getContext().getAuthentication().getName());
+        empresa.setUsuarioCadastro(userLogin.getNome());
         return repository.save(empresa);
     }
 
     @Override
-    public Empresa alterar(Empresa empresa, Long id, BindingResult validacao) {
+    public Empresa alterar(Empresa empresa, Long id, UserLogin userLogin, BindingResult validacao) {
         String erros = CoreUtil.validateModel(validacao);
         if (erros != null)
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, erros);
@@ -58,7 +59,7 @@ public class EmpresaServiceImpl implements EmpresaService {
         if (!Objects.equals(empresaAlterar.getId(), id))
             throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("Solicitado alterar empresa #ID %n, porém enviado dados da empresa #%n", id, empresaAlterar.getId()));
         empresa.setDataUltimaAtualizacao(LocalDateTime.now());
-        empresa.setUsuarioUltimaAtualizacao(SecurityContextHolder.getContext().getAuthentication().getName());
+        empresa.setUsuarioUltimaAtualizacao(userLogin.getNome());
         return repository.save(empresa);
     }
 

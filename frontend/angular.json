@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "apadmin": {
+    "admin": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,15 +18,12 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "apadmin",
+      "prefix": "admin",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": {
-              "base": "../backend/src/main/resources/static",
-              "browser": ""
-            },
+            "outputPath": "dist/default",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -41,15 +38,32 @@
               "node_modules/bootswatch/dist/lumen/bootstrap.min.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css",
               "node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css",
-              "node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/datatables.net-buttons-bs5/css/buttons.bootstrap5.css",
+              "node_modules/datatables.net-responsive-bs5/css/responsive.bootstrap5.css",
+              "node_modules/datatables.net-colreorder-bs5/css/colReorder.bootstrap5.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/datatables.net/js/jquery.dataTables.min.js",
-              "node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js"
+              "node_modules/datatables.net/js/dataTables.min.js",
+              "node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js",
+              "node_modules/jszip/dist/jszip.js",
+              "node_modules/pdfmake/build/pdfmake.js",
+              "node_modules/pdfmake/build/vfs_fonts.js",
+              "node_modules/datatables.net-buttons/js/dataTables.buttons.min.js",
+              "node_modules/datatables.net-buttons-dt/js/buttons.dataTables.min.js",
+              "node_modules/datatables.net-buttons/js/buttons.colVis.min.js",
+              "node_modules/datatables.net-buttons/js/buttons.html5.min.js",
+              "node_modules/datatables.net-buttons/js/buttons.print.min.js",
+              "node_modules/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js",
+              "node_modules/datatables.net-responsive/js/dataTables.responsive.js",
+              "node_modules/datatables.net-responsive-dt/js/responsive.dataTables.js",
+              "node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.js",
+              "node_modules/datatables.net-colreorder/js/dataTables.colReorder.js",
+              "node_modules/datatables.net-colreorder-dt/js/colReorder.dataTables.js",
+              "node_modules/datatables.net-colreorder-bs5/js/colReorder.bootstrap5.js"
             ]
           },
           "configurations": {
@@ -58,7 +72,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "5000kb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -68,10 +82,16 @@
               ],
               "outputHashing": "all"
             },
-            "development": {
+            "localhost": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.localhost.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -80,18 +100,21 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "apadmin:build:production"
+              "buildTarget": "admin:build:production"
             },
-            "development": {
-              "buildTarget": "apadmin:build:development"
+            "localhost": {
+              "buildTarget": "admin:build:localhost"
             }
           },
-          "defaultConfiguration": "development"
+          "options": {
+            "port": 40003
+          },
+          "defaultConfiguration": "localhost"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "apadmin:build"
+            "buildTarget": "admin:build"
           }
         },
         "test": {
@@ -113,6 +136,11 @@
           }
         }
       }
+    }
+  },
+  "cli": {
+    "cache": {
+      "enabled": false
     }
   }
 }

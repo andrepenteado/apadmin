@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &name admin-frontend
+  namespace: apadmin
+  labels: &selector
+    apcode.com.br/app: apadmin
+    apcode.com.br/module: admin-frontend
+    apcode.com.br/version: 1.0.0
+    apcode.com.br/env: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      <<: *selector
+  template:
+    metadata:
+      labels:
+        <<: *selector
+    spec:
+      containers:
+        - name: *name
+          image: ghcr.io/andrepenteado/apadmin/frontend
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: 1G
+          #              cpu: 8000m
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: github-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-frontend
+  namespace: apadmin
+  labels: &selector
+    apcode.com.br/app: apadmin
+    apcode.com.br/module: admin-frontend
+    apcode.com.br/version: 1.0.0
+    apcode.com.br/env: prod
+spec:
+  type: LoadBalancer
+  ports:
+    - name: admin-front
+      port: 80
+      targetPort: 80
+  selector:
+    <<: *selector

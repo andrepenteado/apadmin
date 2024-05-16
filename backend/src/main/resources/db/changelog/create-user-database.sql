@@ -9,13 +9,12 @@ INSERT INTO oauth2_registered_client (
 VALUES (
    'Admin', 'Sistema de administração de empresas e colaboradores', now(), 'Arquiteto do Sistema', 'https://admin.apcode.com.br', 'com.github.andrepenteado.admin', '2023-01-01 00:00:00.000000',
    '{bcrypt}$2a$12$RDbOnTY4oudD2eONOXmrwuOPZQ6NX.iArpcqVazlBLujH90ONmvse', null, 'client_secret_basic',  'refresh_token,client_credentials,authorization_code',
-   'https://admin.apcode.com.br/authorized,https://admin.apcode.com.br/login/oauth2/code/admin-oidc,http://dev.admin.apcode.com.br:30003/authorized,http://dev.admin.apcode.com.br:30003/login/oauth2/code/admin-oidc,http://localhost:30003/authorized,http://localhost:30003/login/oauth2/code/admin-oidc',
-   'https://admin.apcode.com.br/logout,http://dev.admin.apcode.com.br:30003/logout,http://localhost:30003/logout', 'openid',
+   'https://admin.apcode.com.br/authorized,http://localhost:40003/authorized','https://admin.apcode.com.br/logout,http://localhost:40003/logout', 'openid',
    '{"@class":"java.util.Collections$UnmodifiableMap","settings.client.require-proof-key":false,"settings.client.require-authorization-consent":false}',
    '{"@class":"java.util.Collections$UnmodifiableMap","settings.token.reuse-refresh-tokens":false,"settings.token.id-token-signature-algorithm":["org.springframework.security.oauth2.jose.jws.SignatureAlgorithm","RS256"],"settings.token.access-token-time-to-live":["java.time.Duration",900.000000000],"settings.token.access-token-format":{"@class":"org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat","value":"self-contained"},"settings.token.refresh-token-time-to-live":["java.time.Duration",86400.000000000],"settings.token.authorization-code-time-to-live":["java.time.Duration",300.000000000],"settings.token.device-code-time-to-live":["java.time.Duration",300.000000000]}'
 );
 
 INSERT INTO perfil_sistema (authority, id_oauth2_registered_client, descricao)
-VALUES ('ROLE_Admin_Administrador', 'Admin', 'Administrador');
+VALUES ('ROLE_com.github.andrepenteado.admin_ADMINISTRADOR', 'Admin', 'Administrador');
 
-INSERT INTO authorities (username, authority) VALUES ('arquiteto', 'ROLE_Admin_Administrador');
+INSERT INTO authorities (username, authority) VALUES ('arquiteto', 'ROLE_com.github.andrepenteado.admin_ADMINISTRADOR');

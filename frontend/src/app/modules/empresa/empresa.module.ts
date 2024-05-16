@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { EmpresaRoutingModule } from './empresa-routing.module';
 import { PesquisarComponent } from './pesquisar/pesquisar.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask";
-import { DataTablesModule } from "angular-datatables";
-import { CoreModule } from "../../libs/core/core.module"
-import { NgbToast } from "@ng-bootstrap/ng-bootstrap"
 import { ReactiveFormsModule } from "@angular/forms"
+import { NgxApcoreModule } from "@andrepenteado/ngx-apcore"
 import { NgxLoadingModule } from "ngx-loading"
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask"
 
 @NgModule({
   declarations: [
@@ -19,12 +16,11 @@ import { NgxLoadingModule } from "ngx-loading"
   imports: [
     CommonModule,
     EmpresaRoutingModule,
+    ReactiveFormsModule,
     NgxMaskDirective,
     NgxMaskPipe,
-    DataTablesModule,
-    CoreModule,
-    ReactiveFormsModule,
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    NgxApcoreModule
   ],
   providers: [provideNgxMask()]
 })

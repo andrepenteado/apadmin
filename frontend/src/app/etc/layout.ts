@@ -1,7 +1,3 @@
-export class Layout {
+export const LOGOTIPO: string = "<i class=\"bi bi-terminal\"></i> APcode";
 
-  static readonly LOGOTIPO: string = "<i class=\"bi bi-terminal\"></i> APcode";
-
-  static readonly MODULO: string = "Módulo Administrativo"
-
-}
+export const MODULO: string = "Módulo Administrativo"

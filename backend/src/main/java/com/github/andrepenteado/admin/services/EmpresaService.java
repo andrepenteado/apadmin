@@ -1,6 +1,7 @@
 package com.github.andrepenteado.admin.services;
 
 import com.github.andrepenteado.admin.model.entities.Empresa;
+import com.github.andrepenteado.core.web.dto.UserLogin;
 import org.springframework.validation.BindingResult;
 
 import java.util.List;
@@ -12,9 +13,9 @@ public interface EmpresaService {
 
     Optional<Empresa> buscar(Long id);
 
-    Empresa incluir(Empresa empresa, BindingResult validacao);
+    Empresa incluir(Empresa empresa, UserLogin userLogin, BindingResult validacao);
 
-    Empresa alterar(Empresa empresa, Long id, BindingResult validacao);
+    Empresa alterar(Empresa empresa, Long id, UserLogin userLogin, BindingResult validacao);
 
     void excluir(Long id);
 

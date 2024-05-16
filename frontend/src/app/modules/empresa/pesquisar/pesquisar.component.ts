@@ -1,26 +1,17 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subject } from "rxjs";
+import { Component, OnInit } from '@angular/core';
 import { Empresa } from "../../../model/entities/empresa";
 import { EmpresaService } from "../../../services/empresa.service";
 import { Router } from "@angular/router";
-import { DATATABLES_OPTIONS } from "../../../etc/datatables"
-import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/services/exibir-mensagem.service"
-import { DataTableDirective } from "angular-datatables";
 import { ngxLoadingAnimationTypes } from "ngx-loading"
+import { DatatablesService, ExibirMensagemService } from "@andrepenteado/ngx-apcore"
 
 @Component({
-  selector: 'app-pesquisar',
+  selector: 'admin-empresa-pesquisar',
   templateUrl: './pesquisar.component.html',
   styles: [
   ]
 })
-export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
-
-  @ViewChild(DataTableDirective, {static: false})
-  dtElement: DataTableDirective;
-
-  dtOptions: DataTables.Settings = DATATABLES_OPTIONS;
-  dtTrigger: Subject<any> = new Subject<any>();
+export class PesquisarComponent implements OnInit {
 
   lista: Empresa[] = [];
   aguardar = true;
@@ -28,27 +19,12 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
   constructor(
     private empresaService: EmpresaService,
     private router: Router,
-    private exibirMensagem: ExibirMensagemService
+    private exibirMensagem: ExibirMensagemService,
+    private datatablesService: DatatablesService
   ) { }
-
-  ngAfterViewInit(): void {
-    this.dtTrigger.next(null);
-  }
 
   ngOnInit(): void {
     this.pesquisar();
-    this.aguardar
-  }
-
-  ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
-  }
-
-  rerender(): void {
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      dtInstance.destroy();
-      this.dtTrigger.next(null);
-    });
   }
 
   pesquisar(): void {
@@ -57,16 +33,11 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
       .subscribe({
         next: listaEmpresas => {
           this.lista = listaEmpresas;
-          this.rerender();
           this.aguardar = false;
-        },
-        error: objetoErro => {
-          if (objetoErro.error.status == "403") {
-            this.router.navigate(["/acesso-negado"]);
-          }
-          else {
-            this.exibirMensagem.showMessage(`${objetoErro.error.detail}`, "Erro de processamento", DecoracaoMensagem.ERRO);
-          }
+          setTimeout(() => {
+            $('#datatable-pesquisar-empresas').DataTable(this.datatablesService.getOptions());
+          }, 5);
+
         }
       }
     );
@@ -87,10 +58,7 @@ export class PesquisarComponent implements AfterViewInit, OnDestroy, OnInit {
         if (resposta.value) {
           this.empresaService.excluir(empresa.id).subscribe({
             next: () => {
-              this.pesquisar()
-            },
-            error: objetoErro => {
-              this.exibirMensagem.showMessage(`${objetoErro.error.detail}`, "Erro de processamento", DecoracaoMensagem.ERRO);
+              window.location.reload();
             }
           });
         }

@@ -3,12 +3,11 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { EmpresaService } from "../../../services/empresa.service";
 import { Empresa } from "../../../model/entities/empresa";
-import { ViaCepService } from "../../../libs/core/services/via-cep.service";
 import { Observable } from "rxjs"
-import { DecoracaoMensagem, ExibirMensagemService } from "../../../libs/core/services/exibir-mensagem.service"
+import { DecoracaoMensagem, ExibirMensagemService, ViaCepService } from "@andrepenteado/ngx-apcore"
 
 @Component({
-  selector: 'app-cadastro',
+  selector: 'admin-empresa-cadastro',
   templateUrl: './cadastro.component.html',
   styles: [
   ]
@@ -114,13 +113,6 @@ export class CadastroComponent implements OnInit {
             `Dados da empresa ${empresa.nomeFantasia} gravados com sucesso`,
             "Gravar empresa",
             DecoracaoMensagem.SUCESSO
-          );
-        },
-        error: objetoErro => {
-          this.exibirMensagem.showMessage(
-            `${objetoErro.error.detail}`,
-            "Erro no processamento",
-            DecoracaoMensagem.ERRO
           );
         }
       });

@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Cargo } from "../model/entities/cargo";
-import { SISTEMA_URL } from "../etc/routes"
-import { Api } from "../etc/api"
-import { Empresa } from "../model/entities/empresa";
+import { environment } from "../../environments/environment"
+import { API_CARGOS } from "../etc/api"
 
 @Injectable({
   providedIn: 'root'
@@ -16,27 +15,27 @@ export class CargoService {
   ) { }
 
   public listar(): Observable<Cargo[]> {
-    return this.http.get<Cargo[]>(`${SISTEMA_URL.backendURL}${Api.CARGOS}`);
+    return this.http.get<Cargo[]>(`${environment.backendURL}${API_CARGOS}`);
   }
 
   public listarPorEmpresa(idEmpresa: number): Observable<Cargo[]> {
-    return this.http.get<Cargo[]>(`${SISTEMA_URL.backendURL}${Api.CARGOS}/empresa/${idEmpresa}`);
+    return this.http.get<Cargo[]>(`${environment.backendURL}${API_CARGOS}/empresa/${idEmpresa}`);
   }
 
   public buscar(id: number): Observable<Cargo> {
-    return this.http.get<Cargo>(`${SISTEMA_URL.backendURL}${Api.CARGOS}/${id}`);
+    return this.http.get<Cargo>(`${environment.backendURL}${API_CARGOS}/${id}`);
   }
 
   public incluir(cargo: any): Observable<Cargo> {
-    return this.http.post<Cargo>(`${SISTEMA_URL.backendURL}${Api.CARGOS}`, cargo);
+    return this.http.post<Cargo>(`${environment.backendURL}${API_CARGOS}`, cargo);
   }
 
   public alterar(cargo: any): Observable<Cargo> {
-    return this.http.put<Cargo>(`${SISTEMA_URL.backendURL}${Api.CARGOS}/${cargo.id}`, cargo);
+    return this.http.put<Cargo>(`${environment.backendURL}${API_CARGOS}/${cargo.id}`, cargo);
   }
 
   public excluir(id: number): Observable<any> {
-    return this.http.delete(`${SISTEMA_URL.backendURL}${Api.CARGOS}/${id}`);
+    return this.http.delete(`${environment.backendURL}${API_CARGOS}/${id}`);
   }
 
   public compareFn(c1: Cargo, c2: Cargo): boolean {

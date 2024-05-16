@@ -1,4 +1,6 @@
-export const MENU = [
+import { Menu } from "@andrepenteado/ngx-apcore"
+
+export const MENU: Menu[] = [
   {
     id: 'empresa', texto: 'Empresas', icone: 'buildings', path: '/empresa/pesquisar', subMenus: [
       { texto: 'Pesquisar', path: '/empresa/pesquisar' },
